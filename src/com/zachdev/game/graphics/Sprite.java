@@ -38,7 +38,7 @@ public class Sprite {
 			
 			for (x = 0; x < this.size; x++) {
 				
-				pixels[x + y * this.size] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.size]; 
+				pixels[x + y * this.size] = sheet.pixels[(x) + (y) * sheet.size]; 
 			}
 		}
 		

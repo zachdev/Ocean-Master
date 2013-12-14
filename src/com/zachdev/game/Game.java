@@ -110,13 +110,13 @@ public class Game extends Canvas implements Runnable {
 			
 			while (delta >= 1) {		// This will only update 60 times per second
 
-				tick();		// Updates 60 times/sec, graphics
+				tick();		// Updates 60 times/sec, logic
 				ticks++;
 				delta--;
 				
 			}
 			
-			render();	// Updates as many times as possible per sec, logic
+			render();	// Updates as many times as possible per sec, graphics
 			frames++;
 			
 			if (System.currentTimeMillis() - timer > 1000) { // This will execute once per second

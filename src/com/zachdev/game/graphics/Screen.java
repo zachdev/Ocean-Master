@@ -66,9 +66,22 @@ public class Screen {
 				
 				//int xx = x + xOffset;				
 				
-				//int tileIndex = ((xx / 16) & MAP_SIZE_MASK) + ((yy / 16) & MAP_SIZE_MASK) * 8;  // Finds the tile index from x,y coords. Tile size is 8 x 8
+				int tileIndex = ((xp / 16) & MAP_SIZE_MASK) + ((yp / 16) & MAP_SIZE_MASK) * 8;  // Finds the tile index from x,y coords. Tile size is 8 x 8
 				
-				pixels[x + y * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.size];
+				if (tileIndex == 41 || tileIndex == 14 || tileIndex == 29) {
+					
+					pixels[x + y * width] = Sprite.brick.pixels[(x & 15) + (y & 15) * Sprite.brick.size];
+				}
+				
+				else if (tileIndex == 36 || tileIndex == 45 || tileIndex == 59) {
+					
+					pixels[x + y * width] = Sprite.water.pixels[(x & 15) + (y & 15) * Sprite.water.size];
+				}
+				
+				else {
+					
+					pixels[x + y * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.size];
+				}
 				
 			}
 		}

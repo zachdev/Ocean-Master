@@ -16,6 +16,8 @@ public class Sprite {
 	private SpriteSheet sheet;
 	
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
+	public static Sprite brick = new Sprite(16, 1, 0, SpriteSheet.tiles);
+	public static Sprite water = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	
 	public Sprite(int size, int x, int y, SpriteSheet spriteSheet) {
 		
@@ -36,9 +38,9 @@ public class Sprite {
 		
 		for (int y = 0; y < this.size; y++) {
 			
-			for (x = 0; x < this.size; x++) {
+			for (int x = 0; x < this.size; x++) {
 				
-				pixels[x + y * this.size] = sheet.pixels[(x) + (y) * sheet.size]; 
+				pixels[x + y * this.size] = sheet.pixels[(x+this.x) + (y+this.y) * sheet.size]; 
 			}
 		}
 		

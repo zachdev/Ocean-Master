@@ -52,10 +52,10 @@ public class Level {
 		// Corner pins - x,y coordinates of top left and bottom right corners of the rendering area
 		
 		int x0	= xScroll / TILE_SIZE;					// leftmost X coordinate of the screen area we are rendering
-		int x1 = (xScroll + screen.width) / TILE_SIZE; 	// rightmost X coordinate of the screen area we are rendering
+		int x1 = (xScroll + screen.width + 16) / TILE_SIZE; 	// rightmost X coordinate of the screen area we are rendering
 		
 		int y0 = yScroll / TILE_SIZE;					// leftmost y coordinate
-		int y1 = (yScroll + screen.height) / TILE_SIZE;	// rightmost x coordinate
+		int y1 = (yScroll + screen.height + 16) / TILE_SIZE;	// rightmost x coordinate
 		
 		
 		for (int y = y0; y < y1; y++) { 			// Loops through the rendered window space and renders the tiles
@@ -76,6 +76,11 @@ public class Level {
 	 * @return
 	 */
 	public Tile getTile(int x, int y) {
+		
+		if (x < 0 || y < 0 || x >= width || y >= height) {			// If we exceed the tile index just return a void tile
+			
+			return Tile.voidTile;
+		}
 		
 		if (tiles[x + y * width]== 0) {
 			

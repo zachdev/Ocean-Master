@@ -105,10 +105,12 @@ public class Screen {
 				
 				int xa = x + xp; // Adds offset
 				
-				if (xa < 0 || xa >= width || ya < 0 || ya >= width) { // If a tile exits the screen view, stop rendering that tile
+				if (xa < -tile.sprite.size || xa >= width || ya < 0 || ya >= height) { // If a tile exits the screen view, stop rendering that tile
 					
 					break;
 				}
+				
+				if (xa < 0) xa = 0;
 				
 				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.size]; 
 			}

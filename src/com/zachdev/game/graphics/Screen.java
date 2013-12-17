@@ -2,6 +2,8 @@ package com.zachdev.game.graphics;
 
 import java.util.Random;
 
+import com.zachdev.game.level.tile.Tile;
+
 /**
  * Renders the screen
  * @author zach
@@ -12,13 +14,16 @@ public class Screen {
 	public final int MAP_SIZE = 64;
 	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
 	
-	private int width, height;
+	public int width, height;
 	
 	public int[] pixels;
 	
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; // Tile map is 64 x 64
 	
 	private Random random = new Random();
+	
+	public int xOffset, yOffset;
+	
 	
 	public Screen(int width, int height) {
 		
@@ -51,23 +56,17 @@ public class Screen {
 			
 			int yp = y + yOffset;
 			
-			if (yp < 0 || yp >= height) continue;
-			
-			//int yy = y + yOffset;
-			
-			//if (y < 0 || y >= height) break;
-			
+			if (yp < 0 || yp >= height) continue; // Prevent arrayindexoutofboundsexception
 			
 			for (int x = 0; x < width; x++) {
 				
 				int xp = x + xOffset;
 				
-				if (xp < 0 || xp >= width) continue;
-				
-				//int xx = x + xOffset;				
+				if (xp < 0 || xp >= width) continue;			
 				
 				int tileIndex = ((xp / 16) & MAP_SIZE_MASK) + ((yp / 16) & MAP_SIZE_MASK) * 8;  // Finds the tile index from x,y coords. Tile size is 8 x 8
 				
+				// Show some different tiles for testing
 				if (tileIndex == 41 || tileIndex == 14 || tileIndex == 29) {
 					
 					pixels[x + y * width] = Sprite.brick.pixels[(x & 15) + (y & 15) * Sprite.brick.size];
@@ -78,6 +77,11 @@ public class Screen {
 					pixels[x + y * width] = Sprite.water.pixels[(x & 15) + (y & 15) * Sprite.water.size];
 				}
 				
+				else if (tileIndex == 56 || tileIndex == 22 || tileIndex == 7) {
+					
+					pixels[x + y * width] = Sprite.dirt.pixels[(x & 15) + (y & 15) * Sprite.dirt.size];
+				}
+				
 				else {
 					
 					pixels[x + y * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.size];
@@ -85,6 +89,38 @@ public class Screen {
 				
 			}
 		}
+	}
+	
+	
+	public void renderTile(int xp, int yp, Tile tile) {
+		
+		xp -= xOffset;	// Displacing the x, y position of the tile based on offset
+		yp -= yOffset;
+		
+		for (int y = 0; y < tile.sprite.size; y++) {
+			
+			int ya = y + yp; // Adds offset
+			
+			for (int x = 0; x < tile.sprite.size; x++) {
+				
+				int xa = x + xp; // Adds offset
+				
+				if (xa < 0 || xa >= width || ya < 0 || ya >= width) { // If a tile exits the screen view, stop rendering that tile
+					
+					break;
+				}
+				
+				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.size]; 
+			}
+		}
+		
+		
+	}
+	
+	public void setOffset(int xOffset, int yOffset) {
+		
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 
 }

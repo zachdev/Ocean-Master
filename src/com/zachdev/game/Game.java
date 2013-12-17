@@ -12,6 +12,8 @@ import java.awt.image.DataBufferInt;
 
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.input.Keyboard;
+import com.zachdev.game.level.Level;
+import com.zachdev.game.level.RandomLevel;
 
 /**
  * Main game class
@@ -44,6 +46,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private Keyboard keyboard;
 	
+	private Level level;
+	
 	int x = 0, y = 0;
 	
 	public static String title = "Game";
@@ -59,6 +63,8 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		
 		keyboard = new Keyboard();
+		
+		level = new RandomLevel(64, 64);
 		
 		this.addKeyListener(keyboard); // Adds the keyboard listener to the canvas
 		
@@ -138,14 +144,16 @@ public class Game extends Canvas implements Runnable {
 		
 		keyboard.tick(); // Update the keyboard input
 		
-		if (keyboard.up) y--;			// If we press up, move the map down
-		if (keyboard.down) y++;			// If we press down, move the map up
-		if (keyboard.left) x--;			// If we press left, move the map right
-		if (keyboard.right) x++;		// If we press right, move the map left
+		if (keyboard.up) y++;			// If we press up, move the map down
+		if (keyboard.down) y--;			// If we press down, move the map up
+		if (keyboard.left) x++;			// If we press left, move the map right
+		if (keyboard.right) x--;		// If we press right, move the map left
 		
 		
 	}
-	
+	/**
+	 * Renders everything on the screen
+	 */
 	public void render() {
 		
 		BufferStrategy bs = getBufferStrategy();	// Grab the buffer strategy from the Canvas superclass
@@ -157,7 +165,8 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		screen.clear();			// Clear the screen right before each render
-		screen.render(x, y);	// Render the screen
+		//screen.render(x, y);
+		level.render(x, y, screen); // Renders the level
 		
 		
 		for (int i = 0; i < pixels.length; i++) {

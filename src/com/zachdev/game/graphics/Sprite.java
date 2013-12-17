@@ -15,9 +15,12 @@ public class Sprite {
 	
 	private SpriteSheet sheet;
 	
+	public static Sprite voidSprite = new Sprite(16, 0); // Creates a tile with all black colors
+	
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite brick = new Sprite(16, 1, 0, SpriteSheet.tiles);
 	public static Sprite water = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite dirt = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	
 	public Sprite(int size, int x, int y, SpriteSheet spriteSheet) {
 		
@@ -30,6 +33,21 @@ public class Sprite {
 		
 		loadSprite();
 		
+	}
+	
+	public Sprite (int size, int color) {
+		
+		this.size = size;
+		pixels = new int[size * size];
+		setColor(color);
+	}
+	
+	private void setColor(int color) {
+		
+		for (int i = 0; i < size * size; i++) {
+			
+			pixels[i] = color;
+		}
 	}
 	/**
 	 * Loads specific sprite from sprite sheet

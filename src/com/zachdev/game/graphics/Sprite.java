@@ -20,12 +20,19 @@ public class Sprite {
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite brick = new Sprite(16, 1, 0, SpriteSheet.tiles);
 	public static Sprite water = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite water1 = new Sprite(16, 2, 1, SpriteSheet.tiles);
 	public static Sprite dirt = new Sprite(16, 3, 0, SpriteSheet.tiles);
+	public static Sprite rock = new Sprite(16, 4, 0, SpriteSheet.tiles);
 	
 	public static Sprite playerUp = new Sprite(16, 0, 12, SpriteSheet.tiles);
 	public static Sprite playerDown = new Sprite(16, 0, 14, SpriteSheet.tiles);
 	public static Sprite playerLeft = new Sprite(16, 0, 15, SpriteSheet.tiles);
 	public static Sprite playerRight = new Sprite(16, 0, 13, SpriteSheet.tiles);
+	
+	public static Sprite playerUp1 = new Sprite(16, 1, 12, SpriteSheet.tiles);			// Player animations
+	public static Sprite playerDown1 = new Sprite(16, 1, 14, SpriteSheet.tiles);
+	public static Sprite playerLeft1 = new Sprite(16, 1, 15, SpriteSheet.tiles);
+	public static Sprite playerRight1 = new Sprite(16, 1, 13, SpriteSheet.tiles);
 	
 	public Sprite(int size, int x, int y, SpriteSheet spriteSheet) {
 		

@@ -72,8 +72,12 @@ public class Game extends Canvas implements Runnable {
 		
 		player = new Player(keyboard);	// Instantiates Player with keyboard input
 		
+		player.initialize(level);
+		
 		player.x = 300;		// Set the starting player position
 		player.y = 400;
+		
+		
 		
 		this.addKeyListener(keyboard); // Adds the keyboard listener to the canvas
 		
@@ -152,7 +156,13 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {
 		
 		keyboard.tick(); // Update the keyboard input
+		level.tick();
 		player.tick();
+		
+		if (player.x < 0) player.x = 0;					// Temporary Player constraints
+		if (player.y < 0) player.y = 0;
+		if (player.x > 1008) player.x = 1008;
+		if (player.y > 1008) player.y = 1008;
 		
 		//if (keyboard.up) y--;			// If we press up, move the map down
 		//if (keyboard.down) y++;			// If we press down, move the map up
@@ -195,8 +205,9 @@ public class Game extends Canvas implements Runnable {
 		
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Verdana", 0, 50));
-		g.drawString("X: " + player.x + " Y: " + player.y, 300, 400);
+		g.setFont(new Font("Verdana", 0, 40));
+		g.drawString("X: " + player.x + " Y: " + player.y, 1, 40);
+		g.drawString(String.format("Tile (%d, %d)", player.x/16, player.y/16), 1, 81);
 		
 		g.dispose(); // Releases all graphics/resources in the frame
 		bs.show();

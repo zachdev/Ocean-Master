@@ -1,16 +1,29 @@
 package com.zachdev.game.level;
 
+import java.util.Random;
+
 import com.zachdev.game.graphics.Screen;
+import com.zachdev.game.graphics.Sprite;
 import com.zachdev.game.level.tile.Tile;
 
 public class Level {
 	
-	private final int TILE_SIZE = 16;
+	private static Random random = new Random();
 	
-	protected int width, height;
+	private final int TILE_SIZE = 16;			// Each tile is 16 * 16 pixels
+	
+	public int width, height;
 	
 	protected int[] tiles;
 	
+	private int animate = 0;
+	
+	/**
+	 * Constructor that instantiates a new Level with a given width and height (in tile precision)
+	 *
+	 * @param width
+	 * @param height
+	 */
 	public Level(int width, int height) {
 		
 		this.width = width;
@@ -40,6 +53,14 @@ public class Level {
 	 * Updates events in the level (mobs moving around, etc)
 	 */
 	public void tick() {
+		
+		if (animate < 10000) {
+			
+			animate++;				// Increase animation count
+		}else {
+			
+			animate = 0;			// Else reset the animation count to 0 after 10000 ticks so game doesn't crash
+		}
 		
 		
 	}
@@ -77,6 +98,7 @@ public class Level {
 	 */
 	public Tile getTile(int x, int y) {
 		
+		
 		if (x < 0 || y < 0 || x >= width || y >= height) {			// If we exceed the tile index just return a void tile
 			
 			return Tile.voidTile;
@@ -84,17 +106,20 @@ public class Level {
 		
 		if (tiles[x + y * width]== 0) {
 			
-			return Tile.water;
+			return Tile.rock;
 		}
 
-		if (tiles[x + y * width]== 1) {
-			
-			return Tile.water;
-		}
-
-		if (tiles[x + y * width]== 2 || tiles[x + y * width]== 3) {
+		if (tiles[x + y * width]== 1 || tiles[x + y * width]== 2 || tiles[x + y * width]== 3) {
 	
-			return Tile.water;
+			
+			if (animate % 90 > 10) {					// animate incrases by 60 each second
+				// Whenever the remainder of anim and 20 is > 10 (50% of the time)
+				return Tile.water;
+			}
+			else {
+
+				return Tile.water1;
+			}
 		}
 		
 		return Tile.voidTile;		// Return a void tile if nothing else

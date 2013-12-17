@@ -15,7 +15,11 @@ public class Tile {
 	
 	public static Tile water = new GrassTile(Sprite.water); // Static object - water tile grabbed from Sprite class
 	
+	public static Tile water1 = new GrassTile(Sprite.water1); // Static object - water tile grabbed from Sprite class
+	
 	public static Tile brick = new GrassTile(Sprite.brick); // Static object - brick tile grabbed from Sprite class
+	
+	public static Tile rock = new RockTile(Sprite.rock);	// Rock tile, collidable
 	
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 	

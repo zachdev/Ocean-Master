@@ -29,5 +29,10 @@ public class Entity {
 		// Removed the Entity from the level
 		removed = true;
 	}
+		
+	public void initialize(Level level) {		// Initializes with the provided Level
+		
+		this.level = level;
+	}
 
 }

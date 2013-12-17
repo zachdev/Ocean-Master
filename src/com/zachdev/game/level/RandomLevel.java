@@ -16,8 +16,12 @@ public class RandomLevel extends Level {
 		for (int y = 0; y < height; y++) {
 			
 			for (int x = 0; x < width; x++) {
-				
 				tiles[x + y * width]= random.nextInt(3); // Generates a random tile between 0 and 3
+				
+				if (x == 17) {
+					
+					tiles[x + y * width]= 0;
+				}
 				
 				
 			}

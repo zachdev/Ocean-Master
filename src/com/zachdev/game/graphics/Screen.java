@@ -119,6 +119,39 @@ public class Screen {
 		
 	}
 	
+	public void renderPlayer(int xp, int yp, Sprite sprite) {
+		
+		xp -= xOffset;	// Displacing the x, y position of the tile based on offset
+		yp -= yOffset;
+		
+		for (int y = 0; y < 16; y++) {
+			
+			int ya = y + yp; // Adds offset
+			
+			for (int x = 0; x < 16; x++) {
+				
+				int xa = x + xp; // Adds offset
+				
+				if (xa < -16 || xa >= width || ya < 0 || ya >= height) { // If a tile exits the screen view, stop rendering that tile
+					
+					break;
+				}
+				
+				if (xa < 0) xa = 0;
+				
+				int color = sprite.pixels[x + y * sprite.size];
+				
+				if (color != 0xFFFFFF) {	// If the tile background is white don't render it
+					
+					pixels[xa + ya * width] = color; 
+					
+					
+				}
+			}
+		}
+		
+	}
+	
 	public void setOffset(int xOffset, int yOffset) {
 		
 		this.xOffset = xOffset;

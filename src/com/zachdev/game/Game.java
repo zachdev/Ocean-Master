@@ -5,11 +5,13 @@ import javax.swing.*;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import com.zachdev.game.entity.mob.Player;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.input.Keyboard;
 import com.zachdev.game.level.Level;
@@ -48,6 +50,8 @@ public class Game extends Canvas implements Runnable {
 	
 	private Level level;
 	
+	private Player player; // The player
+	
 	int x = 0, y = 0;
 	
 	public static String title = "Game";
@@ -65,6 +69,11 @@ public class Game extends Canvas implements Runnable {
 		keyboard = new Keyboard();
 		
 		level = new RandomLevel(64, 64);
+		
+		player = new Player(keyboard);	// Instantiates Player with keyboard input
+		
+		player.x = 300;		// Set the starting player position
+		player.y = 400;
 		
 		this.addKeyListener(keyboard); // Adds the keyboard listener to the canvas
 		
@@ -143,11 +152,12 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {
 		
 		keyboard.tick(); // Update the keyboard input
+		player.tick();
 		
-		if (keyboard.up) y++;			// If we press up, move the map down
-		if (keyboard.down) y--;			// If we press down, move the map up
-		if (keyboard.left) x++;			// If we press left, move the map right
-		if (keyboard.right) x--;		// If we press right, move the map left
+		//if (keyboard.up) y--;			// If we press up, move the map down
+		//if (keyboard.down) y++;			// If we press down, move the map up
+		//if (keyboard.left) x--;			// If we press left, move the map right
+		//if (keyboard.right) x++;		// If we press right, move the map left
 		
 		
 	}
@@ -165,8 +175,12 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		screen.clear();			// Clear the screen right before each render
-		//screen.render(x, y);
-		level.render(x, y, screen); // Renders the level
+		
+		int xScroll = player.x - screen.width / 2;		// Places the player in the middle of the screen
+		int yScroll = player.y - screen.height / 2;
+		
+		level.render(xScroll, yScroll, screen); // Renders the level
+		player.render(screen);					// Renders the player
 		
 		
 		for (int i = 0; i < pixels.length; i++) {
@@ -180,6 +194,9 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Verdana", 0, 50));
+		g.drawString("X: " + player.x + " Y: " + player.y, 300, 400);
 		
 		g.dispose(); // Releases all graphics/resources in the frame
 		bs.show();

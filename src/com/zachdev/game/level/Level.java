@@ -84,12 +84,12 @@ public class Level {
 		
 		if (tiles[x + y * width]== 0) {
 			
-			return Tile.grass;
+			return Tile.water;
 		}
 
 		if (tiles[x + y * width]== 1) {
 			
-			return Tile.brick;
+			return Tile.water;
 		}
 
 		if (tiles[x + y * width]== 2 || tiles[x + y * width]== 3) {

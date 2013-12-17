@@ -16,11 +16,14 @@ public class RandomLevel extends Level {
 		for (int y = 0; y < height; y++) {
 			
 			for (int x = 0; x < width; x++) {
-				tiles[x + y * width]= random.nextInt(3); // Generates a random tile between 0 and 3
 				
-				if (x == 17) {
+				if (y == 25) {					// If we're at the 25th tile (player starting position) make sure there's no rock there 
 					
-					tiles[x + y * width]= 0;
+					tiles[x + y * width]= 1;
+				}
+				else {
+					
+					tiles[x + y * width]= random.nextInt(3); // Generates a random tile between 0 and 3
 				}
 				
 				

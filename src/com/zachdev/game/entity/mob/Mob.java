@@ -41,7 +41,7 @@ public abstract class Mob extends Entity {
 			
 			y += y0;
 			
-			System.out.printf("Player Location: (%d, %d)%n", x / 16, y / 16);
+			//System.out.printf("Player Location: (%d, %d)%n", x / 16, y / 16);
 		}
 		
 	}
@@ -72,7 +72,7 @@ public abstract class Mob extends Entity {
 			
 			if (level.getTile(xt, yt).solid()) solid = true;	// We look at the tile just ahead of our Mob
 			
-			if (solid) System.out.println("Tile is solid");
+			if (solid) System.out.println("Collision");
 			
 			
 			

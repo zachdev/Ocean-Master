@@ -104,15 +104,16 @@ public class Level {
 			return Tile.voidTile;
 		}
 		
-		if (tiles[x + y * width]== 0) {
+		if (tiles[x + y * width]== 0xFF666699) {
 			
 			return Tile.rock;
 		}
 
-		if (tiles[x + y * width]== 1 || tiles[x + y * width]== 2 || tiles[x + y * width]== 3) {
+		if (tiles[x + y * width]== 0xFF0000cc) {
 	
+			System.out.println(animate % 90 == 2);
 			
-			if (animate % 90 > 10) {					// animate incrases by 60 each second
+			if (animate % 90 >= 6) {					// animate incrases by 60 each second
 				// Whenever the remainder of anim and 20 is > 10 (50% of the time)
 				return Tile.water;
 			}

@@ -11,7 +11,7 @@ import com.zachdev.game.level.tile.Tile;
  */
 public class Screen {
 	
-	public final int MAP_SIZE = 64;
+	public final int MAP_SIZE = 16;
 	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
 	
 	public int width, height;

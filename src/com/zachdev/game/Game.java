@@ -16,6 +16,7 @@ import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.input.Keyboard;
 import com.zachdev.game.level.Level;
 import com.zachdev.game.level.RandomLevel;
+import com.zachdev.game.level.LoadedLevel;
 
 /**
  * Main game class
@@ -68,14 +69,16 @@ public class Game extends Canvas implements Runnable {
 		
 		keyboard = new Keyboard();
 		
-		level = new RandomLevel(64, 64);
+		level = new LoadedLevel("/graphics/level.png");
+		
+		//level = new RandomLevel(64, 64);
 		
 		player = new Player(keyboard);	// Instantiates Player with keyboard input
 		
 		player.initialize(level);
 		
-		player.x = 300;		// Set the starting player position
-		player.y = 400;
+		player.x = 100;		// Set the starting player position
+		player.y = 100;
 		
 		
 		

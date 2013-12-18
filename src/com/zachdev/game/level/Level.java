@@ -1,7 +1,10 @@
 package com.zachdev.game.level;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import com.zachdev.game.entity.Entity;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
 import com.zachdev.game.level.tile.Tile;
@@ -17,6 +20,8 @@ public class Level {
 	protected int[] tiles;
 	
 	private int animate = 0;
+	
+	private List<Entity> entities = new ArrayList<Entity>();
 	
 	/**
 	 * Constructor that instantiates a new Level with a given width and height (in tile precision)
@@ -62,6 +67,11 @@ public class Level {
 			animate = 0;			// Else reset the animation count to 0 after 10000 ticks so game doesn't crash
 		}
 		
+		for (int i = 0; i < entities.size(); i++) {	// Update all entities
+			
+			entities.get(i).tick();
+		}
+		
 		
 	}
 	
@@ -87,6 +97,16 @@ public class Level {
 				
 			}
 		}
+		
+		for (int i = 0; i < entities.size(); i++) {		// Render all our entities
+			
+			entities.get(i).render(screen);
+		}
+	}
+	
+	public void add(Entity e) {
+		
+		entities.add(e); // Add entity to our list of Entities
 	}
 	
 	
@@ -111,7 +131,7 @@ public class Level {
 
 		if (tiles[x + y * width]== 0xFF0000cc) {
 	
-			System.out.println(animate % 90 == 2);
+			//System.out.println(animate % 90 == 2);
 			
 			if (animate % 90 >= 6) {					// animate incrases by 60 each second
 				// Whenever the remainder of anim and 20 is > 10 (50% of the time)
@@ -132,5 +152,6 @@ public class Level {
 		
 		
 	}
+
 
 }

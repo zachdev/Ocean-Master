@@ -144,7 +144,7 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) { // This will execute once per second
 				
 				timer += 1000;
-				System.out.println(ticks + " fps, " + frames + " ticks/sec");
+				//System.out.println(ticks + " fps, " + frames + " ticks/sec");
 				frame.setTitle(Game.title + " | " + ticks + " fps, " + frames + " ticks/sec");
 				ticks = 0;
 				frames = 0;
@@ -159,8 +159,9 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {
 		
 		keyboard.tick(); // Update the keyboard input
-		level.tick();
 		player.tick();
+		level.tick();
+
 		
 		if (player.x < 0) player.x = 0;					// Temporary Player constraints
 		if (player.y < 0) player.y = 0;

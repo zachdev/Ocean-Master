@@ -1,6 +1,11 @@
 package com.zachdev.game.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.zachdev.game.entity.Entity;
+import com.zachdev.game.entity.Projectile;
+import com.zachdev.game.entity.ShipProjectile;
 import com.zachdev.game.graphics.Sprite;
 
 /**
@@ -16,6 +21,8 @@ public abstract class Mob extends Entity {
 	protected int direction = 0; // 0 = north, 1 east, 2 south, 3 west
 	
 	protected boolean moving = false;
+	
+	protected List<Projectile> projectiles = new ArrayList<Projectile>();
 	
 	
 	public void move(int x0, int y0) {
@@ -52,6 +59,17 @@ public abstract class Mob extends Entity {
 	}
 	
 	public void render() {
+		
+		
+	}
+	
+	protected void shoot(int x, int y, double direction) {
+		
+		Projectile p = new ShipProjectile(this.x,  this.y, 2);
+		projectiles.add(p);
+		level.add(p);
+		
+		//System.out.println("Shooting!"); 
 		
 		
 	}

@@ -112,7 +112,16 @@ public class Screen {
 				
 				if (xa < 0) xa = 0;
 				
-				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.size]; 
+				int color = tile.sprite.pixels[x + y * tile.sprite.size];
+				
+				pixels[xa + ya * width] = color; 
+				
+				if (color != 0xFFFFFF) {	// If the tile background is white don't render it
+					
+					pixels[xa + ya * width] = color; 
+					
+					
+				}
 			}
 		}
 		

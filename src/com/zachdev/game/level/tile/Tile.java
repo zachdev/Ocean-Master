@@ -21,6 +21,8 @@ public class Tile {
 	
 	public static Tile rock = new RockTile(Sprite.rock);	// Rock tile, collidable
 	
+	public static Tile bomb = new GrassTile(Sprite.bomb);
+	
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 	
 	public Tile(Sprite sprite) {

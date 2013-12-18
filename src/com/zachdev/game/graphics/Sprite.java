@@ -24,6 +24,8 @@ public class Sprite {
 	public static Sprite dirt = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite rock = new Sprite(16, 4, 0, SpriteSheet.tiles);
 	
+	public static Sprite bomb = new Sprite(16, 5, 0, SpriteSheet.tiles);
+	
 	public static Sprite playerUp = new Sprite(16, 0, 12, SpriteSheet.tiles);
 	public static Sprite playerDown = new Sprite(16, 0, 14, SpriteSheet.tiles);
 	public static Sprite playerLeft = new Sprite(16, 0, 15, SpriteSheet.tiles);

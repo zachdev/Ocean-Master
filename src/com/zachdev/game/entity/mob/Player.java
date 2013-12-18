@@ -1,5 +1,10 @@
 package com.zachdev.game.entity.mob;
 
+import java.awt.event.KeyEvent;
+
+import com.zachdev.game.Game;
+import com.zachdev.game.entity.Projectile;
+import com.zachdev.game.entity.ShipProjectile;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
 import com.zachdev.game.input.Keyboard;
@@ -13,6 +18,8 @@ public class Player extends Mob {
 	private int animate = 0;
 	
 	private boolean moving = false;
+	
+	private long timer = System.currentTimeMillis();
 	
 	public Player (Keyboard input) {
 		
@@ -55,6 +62,19 @@ public class Player extends Mob {
 		if (input.left) xa--;
 		if (input.right) xa++;
 		
+		if (animate % 20 < 10) {
+			
+			if(input.shooting) {		// If we are pressing the space bar
+				
+				if (System.currentTimeMillis() - timer > 1000) { // Only allow one bomb to be dropped per second
+					
+					timer = System.currentTimeMillis();
+					shoot(x, y, direction);	// Supposed to shoot a projectile, but just drops bomb now
+					System.out.println("Dropping bomb");
+				}
+			}
+		}
+		
 		if (xa != 0 || ya != 0) {
 			
 			move(xa, ya);			// Uses the Mob superclass move method to move the Player
@@ -64,7 +84,14 @@ public class Player extends Mob {
 			moving = false;
 		}
 		
+		//updateShooting();
 		
+		
+	}
+	
+	private void updateShooting() {
+		
+
 	}
 	
 	public void render(Screen screen) {

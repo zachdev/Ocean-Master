@@ -11,9 +11,7 @@ import com.zachdev.game.level.tile.Tile;
 
 public class Level {
 	
-	private static Random random = new Random();
-	
-	private final int TILE_SIZE = 16;			// Each tile is 16 * 16 pixels
+	public static final int TILE_SIZE = 16;
 	
 	public int width, height;
 	
@@ -21,7 +19,7 @@ public class Level {
 	
 	private int animate = 0;
 	
-	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Entity> entities = new ArrayList<Entity>();		// A list of all entities on the level
 	
 	/**
 	 * Constructor that instantiates a new Level with a given width and height (in tile precision)

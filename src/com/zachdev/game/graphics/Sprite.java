@@ -36,19 +36,35 @@ public class Sprite {
 	public static Sprite playerLeft1 = new Sprite(16, 1, 15, SpriteSheet.tiles);
 	public static Sprite playerRight1 = new Sprite(16, 1, 13, SpriteSheet.tiles);
 	
+	public static Sprite enemyUp = new Sprite(16, 0, 8, SpriteSheet.tiles);				// Enemy tiles and animations
+	public static Sprite enemyDown = new Sprite(16, 0, 10, SpriteSheet.tiles);
+	public static Sprite enemyLeft = new Sprite(16, 0, 11, SpriteSheet.tiles);
+	public static Sprite enemyRight = new Sprite(16, 0, 9, SpriteSheet.tiles);
+	
+	public static Sprite enemyUp1 = new Sprite(16, 1, 8, SpriteSheet.tiles);
+	public static Sprite enemyDown1 = new Sprite(16, 1, 10, SpriteSheet.tiles);
+	public static Sprite enemyLeft1 = new Sprite(16, 1, 11, SpriteSheet.tiles);
+	public static Sprite enemyRight1 = new Sprite(16, 1, 9, SpriteSheet.tiles);
+	
 	public Sprite(int size, int x, int y, SpriteSheet spriteSheet) {
 		
 		pixels = new int[size * size]; 		// Creates pixel array of sprite size
 		
 		this.size = size;
-		this.x = x * size; 					// Gets sprite from x, y coordinates
-		this.y = y * size;					//
+		this.x = x * size; 					// Gets sprite grid location from x, y pixels coordinates
+		this.y = y * size;					
 		this.sheet = spriteSheet;
 		
 		loadSprite();
 		
 	}
 	
+	/**
+	 * Constructor that creates a new Sprite with the given size and color value
+	 * 
+	 * @param size
+	 * @param color
+	 */
 	public Sprite (int size, int color) {
 		
 		this.size = size;
@@ -72,7 +88,7 @@ public class Sprite {
 			
 			for (int x = 0; x < this.size; x++) {
 				
-				pixels[x + y * this.size] = sheet.pixels[(x+this.x) + (y+this.y) * sheet.size]; 
+				pixels[x + y * this.size] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.size]; 
 			}
 		}
 		

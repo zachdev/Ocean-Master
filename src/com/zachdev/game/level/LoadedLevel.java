@@ -2,9 +2,12 @@ package com.zachdev.game.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.security.KeyStore.LoadStoreParameter;
 
 import javax.imageio.ImageIO;
 
+import com.zachdev.game.entity.mob.Enemy;
 import com.zachdev.game.level.tile.Tile;
 
 public class LoadedLevel extends Level {
@@ -17,6 +20,12 @@ public class LoadedLevel extends Level {
 		
 	}
 	
+	/**
+	 * Performs the loading of a level file from an image, converts each pixel into a RGB color value
+	 * and then loads these pixel values into the tiles[] array
+	 * 
+	 * @param filePath
+	 */
 	protected void loadLevel(String filePath) {
 		
 		
@@ -38,6 +47,7 @@ public class LoadedLevel extends Level {
 		}
 		
 		
+		
 	}
 	
 	/**
@@ -48,7 +58,7 @@ public class LoadedLevel extends Level {
 	 */
 	protected void generateLevel() {
 		
-		System.out.println("Tiles: " + tiles[0]);
+		//System.out.println("Tiles: " + tiles[0]);
 		
 		
 	}

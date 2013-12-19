@@ -18,7 +18,7 @@ public class Screen {
 	
 	public int[] pixels;
 	
-	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; // Tile map is 64 x 64
+	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; 
 	
 	private Random random = new Random();
 	
@@ -31,15 +31,12 @@ public class Screen {
 		this.height = height;
 		
 		pixels = new int[width * height];
-		
-		
-		
-		for (int i = 0; i < MAP_SIZE * MAP_SIZE; i++) { // Generates the tiles
-			
-			tiles[i]= random.nextInt(0xffffff); // Will generate a random color each time 
-		}
+
 	}
 	
+	/**
+	 * Clears the screen of all image data and resets all pixels to black
+	 */
 	public void clear() {
 		
 		//Cycle through every pixel in the pixels[] array and set to black 
@@ -128,7 +125,7 @@ public class Screen {
 		
 	}
 	
-	public void renderPlayer(int xp, int yp, Sprite sprite) {
+	public void renderMob(int xp, int yp, Sprite sprite) {
 		
 		xp -= xOffset;	// Displacing the x, y position of the tile based on offset
 		yp -= yOffset;

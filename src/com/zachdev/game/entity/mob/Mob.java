@@ -6,7 +6,9 @@ import java.util.List;
 import com.zachdev.game.entity.Entity;
 import com.zachdev.game.entity.Projectile;
 import com.zachdev.game.entity.ShipProjectile;
+import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
+import com.zachdev.game.level.Level;
 
 /**
  * Handles the movement of the mob, as well as other Mob characteristics
@@ -16,6 +18,8 @@ import com.zachdev.game.graphics.Sprite;
  */
 public abstract class Mob extends Entity {
 	
+	private static final int TILE_SIZE = Level.TILE_SIZE;
+	
 	protected Sprite sprite;
 	
 	protected int direction = 0; // 0 = north, 1 east, 2 south, 3 west
@@ -23,6 +27,17 @@ public abstract class Mob extends Entity {
 	protected boolean moving = false;
 	
 	protected List<Projectile> projectiles = new ArrayList<Projectile>();
+	
+	protected enum Direction {
+		
+		UP, DOWN, LEFT, RIGHT
+	}
+	
+	protected Direction mobDirection;
+	
+	// These methods are different for each Mob and so are implemented in each Mob subclass
+	public abstract void tick();
+	public abstract void render(Screen screen);
 	
 	
 	public void move(int x0, int y0) {
@@ -37,10 +52,10 @@ public abstract class Mob extends Entity {
 			return;
 		}
 		
-		if (x0 > 0) direction = 1;		// Right
-		if (x0 < 0) direction = 3;		// Left
-		if (y0 > 0) direction = 2;		// Down
-		if (y0 < 0) direction = 0;		// Up
+		if (x0 > 0) mobDirection = Direction.RIGHT;		// Right
+		if (x0 < 0) mobDirection = Direction.LEFT;		// Left
+		if (y0 > 0) mobDirection = Direction.DOWN;		// Down
+		if (y0 < 0) mobDirection = Direction.UP;		// Up
 
 		if (!collision(x0, y0)) { // If there's no collision, we increase x and y variables (mob location)
 			// -1, 0, or 1
@@ -53,15 +68,6 @@ public abstract class Mob extends Entity {
 		
 	}
 	
-	public void tick() {
-		
-		
-	}
-	
-	public void render() {
-		
-		
-	}
 	
 	protected void shoot(int x, int y, double direction) {
 		
@@ -81,21 +87,20 @@ public abstract class Mob extends Entity {
 		boolean solid = false;
 		
 		// Need to check every corner of the tile for collision
+		// Iterates through each corner of the tile, checking for a collision
 		
 		for (int corner = 0; corner < 4; corner++) {
 			
-			int xt = ((x + xa) + corner % 2 * 10 + 4) / 16;
+			int xt = ((x + xa) + corner % 2 * 10 + 4) / TILE_SIZE;
 			
-			int yt = ((y + ya) + corner / 2 * 2 + 8) / 16;
+			int yt = ((y + ya) + corner / 2 * 2 + 8) / TILE_SIZE;
 			
 			if (level.getTile(xt, yt).solid()) solid = true;	// We look at the tile just ahead of our Mob
 			
-			if (solid) System.out.println("Collision");
-			
-			
+			if (solid) System.out.println("Collision");	
 			
 		}
-																			// And if it's solid, we return true
+
 		return solid;
 	}
 

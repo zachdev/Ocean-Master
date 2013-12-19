@@ -96,7 +96,7 @@ public class Player extends Mob {
 	
 	public void render(Screen screen) {
 		
-		if (direction == 0) {								// Adds animations to Player sprite
+		if (mobDirection == Direction.UP) {								// Adds animations to Player sprite
 					
 			if (moving) {									// If we're moving up
 				
@@ -110,7 +110,7 @@ public class Player extends Mob {
 				}
 			}
 		}
-		if (direction == 1) {
+		if (mobDirection == Direction.RIGHT) {
 			
 			if (moving) {
 				
@@ -124,7 +124,7 @@ public class Player extends Mob {
 				}
 			}
 		}
-		if (direction == 2) {
+		if (mobDirection == Direction.DOWN) {
 			
 			if (moving) {
 				
@@ -139,7 +139,7 @@ public class Player extends Mob {
 			}
 			
 		}
-		if (direction == 3) {
+		if (mobDirection == Direction.LEFT) {
 			
 			if (moving) {
 				
@@ -155,7 +155,7 @@ public class Player extends Mob {
 		}
 		
 		
-		screen.renderPlayer(x, y, sprite);
+		screen.renderMob(x, y, sprite);
 		
 		
 	}

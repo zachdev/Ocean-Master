@@ -31,13 +31,13 @@ public class Tile {
 	}
 	
 	public void render(int x, int y, Screen screen) {
-		
-		
+							// Actual rendering is done in the subclasses
 	}
+		
 	
 	public boolean solid() {
 		
-		return false;
+		return false;		// False is returned by default in subclasses
 	}
 
 }

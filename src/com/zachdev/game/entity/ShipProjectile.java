@@ -89,9 +89,9 @@ public class ShipProjectile extends Projectile {
 
 		for (int corner = 0; corner < 4; corner++) {
 
-			int xt = ((x + xa) + corner % 2 * 10 + 4) / 16;
+			int xt = ((x + xa) + corner % 2 * 10 + 8) / 16;
 
-			int yt = ((y + ya) + corner / 2 * 2 + 8) / 16;
+			int yt = ((y + ya) + corner / 2 * 2 - 6) / 16;
 
 			//String tileName = level.getTile(xt, yt).getClass().getSimpleName();
 

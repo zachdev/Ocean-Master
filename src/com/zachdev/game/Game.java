@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private static final String GAME_TITLE = "Ocean Master";
 
-	private static final int WINDOW_WIDTH = 300;
+	private static final int WINDOW_WIDTH = 400;
 	private static final int WINDOW_HEIGHT = WINDOW_WIDTH / 16 * 9;
 	
 	//private static final int WINDOW_WIDTH = 1280 / 3;
@@ -104,6 +104,13 @@ public class Game extends Canvas implements Runnable {
 		level.add(enemy2);
 		enemy2.initialize(level);
 	
+		Enemy enemy3 = new Enemy(11, 9, 1);
+		level.add(enemy3);
+		enemy3.initialize(level);
+		
+		Enemy enemy4 = new Enemy(10, 10, 0);
+		level.add(enemy4);
+		enemy4.initialize(level);
 		
 		this.addKeyListener(keyboard); // Adds the keyboard listener to the canvas
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH * SCALE, WINDOW_HEIGHT * SCALE));	// Set the canvas size

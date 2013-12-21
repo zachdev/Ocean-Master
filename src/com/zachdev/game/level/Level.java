@@ -139,9 +139,8 @@ public class Level {
 		if (tiles[pixelLocation]== 0xFF666699) {
 			
 			return Tile.rock;
-		}
-
-		if (tiles[pixelLocation]== 0xFF0000cc) {
+		} 
+		else if (tiles[pixelLocation]== 0xFF0000cc) {
 	
 			//System.out.println(animate % 90 == 2);
 			

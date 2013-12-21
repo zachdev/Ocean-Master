@@ -57,12 +57,18 @@ public class Enemy extends Mob {
 		if (ya < -1)
 			ya = -1;
 		
+		if (collision(xa, ya)) {
+			
+			xa = -xa;
+			ya = -ya;
+		}
+		
 		if (time % shootingTime[random.nextInt(3)] == 0) {
 			
 			shoot(xa, ya, this.direction);
 		}
 
-		if (time % 120 == 0) {
+		if (time % shootingTime[random.nextInt(3)] == 0) {
 
 			xa = -xa;
 			ya = -ya;

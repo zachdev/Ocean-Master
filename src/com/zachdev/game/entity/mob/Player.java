@@ -61,7 +61,7 @@ public class Player extends Mob {
 			
 			if(input.shooting) {		// If we are pressing the space bar
 				
-				if (System.currentTimeMillis() - timer > 1000) { // Only allow one bomb to be dropped per second
+				if (System.currentTimeMillis() - timer > 200) { // Only allow one shot per 200 millisec
 					
 					timer = System.currentTimeMillis();
 					shoot(x, y, direction);	

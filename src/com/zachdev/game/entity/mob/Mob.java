@@ -114,7 +114,7 @@ public abstract class Mob extends Entity {
 			
 			if (level.getTile(xt, yt).solid()) solid = true;	// We look at the tile just ahead of our Mob
 			
-			if (solid) System.out.println("Collision with " + tileName);	
+			if (solid) System.out.println(" Collision with " + tileName);	
 			
 		}
 

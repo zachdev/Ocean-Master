@@ -11,17 +11,15 @@ public class Tile {
 	
 	public Sprite sprite; // Sprite of this tile
 	
-	public static Tile grass = new GrassTile(Sprite.grass); // Static object - grass tile grabbed from Sprite class
+	//public static Tile grass = new GrassTile(Sprite.grass); // Static object - grass tile grabbed from Sprite class
 	
-	public static Tile water = new GrassTile(Sprite.water); // Static object - water tile grabbed from Sprite class
+	public static Tile water = new WaterTile(Sprite.water); // Static object - water tile grabbed from Sprite class
 	
-	public static Tile water1 = new GrassTile(Sprite.water1); // Static object - water tile grabbed from Sprite class
-	
-	public static Tile brick = new GrassTile(Sprite.brick); // Static object - brick tile grabbed from Sprite class
+	public static Tile water1 = new WaterTile(Sprite.water1); // Static object - water tile grabbed from Sprite class
 	
 	public static Tile rock = new RockTile(Sprite.rock);	// Rock tile, collidable
 	
-	public static Tile bomb = new GrassTile(Sprite.bomb);
+	public static Tile bomb = new WaterTile(Sprite.bomb);
 	
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 	
@@ -31,8 +29,11 @@ public class Tile {
 	}
 	
 	public void render(int x, int y, Screen screen) {
-		// Actual rendering is done in the Tile subclasses
-	}
+		
+		// Render stuff here
+			screen.renderTile(x * Tile.TILE_SIZE, y * Tile.TILE_SIZE, this);
+			
+		}
 		
 	
 	public boolean solid() {

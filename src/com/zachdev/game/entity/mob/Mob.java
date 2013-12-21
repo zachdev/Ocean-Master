@@ -86,6 +86,7 @@ public abstract class Mob extends Entity {
 		//System.out.println("direction: " + this.direction);
 		
 		Projectile p = new ShipProjectile(this.x,  this.y, this.direction);
+		p.initialize(level);
 		projectiles.add(p);
 		level.add(p);
 		

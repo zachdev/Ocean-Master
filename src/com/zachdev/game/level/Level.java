@@ -68,7 +68,20 @@ public class Level {
 			entities.get(i).tick();
 		}
 		
+		remove();
 		
+		
+	}
+	
+	private void remove() {
+		
+		for (int i = 0; i < entities.size(); i++) {	// Update all entities
+			
+			if (entities.get(i).isRemoved()) {
+				
+				entities.remove(i);
+			}
+		}
 	}
 	
 	
@@ -104,6 +117,7 @@ public class Level {
 		
 		entities.add(e); // Add entity to our list of Entities
 	}
+	
 	
 	
 	/**

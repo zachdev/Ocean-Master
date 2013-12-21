@@ -64,8 +64,7 @@ public class Player extends Mob {
 				if (System.currentTimeMillis() - timer > 1000) { // Only allow one bomb to be dropped per second
 					
 					timer = System.currentTimeMillis();
-					shoot(x, y, direction);	// Supposed to shoot a projectile, but just drops bomb now
-					System.out.println("Dropping bomb");
+					shoot(x, y, direction);	
 				}
 			}
 		}

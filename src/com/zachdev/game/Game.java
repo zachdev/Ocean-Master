@@ -92,11 +92,17 @@ public class Game extends Canvas implements Runnable {
 		
 		player = new Player(playerSpawnLocation.getX(), playerSpawnLocation.getY(), keyboard);	// Spawn player at tile 6,5 
 		
-		enemy = new Enemy(8, 6);
 		
 		player.initialize(level);
 		
+		
+		enemy = new Enemy(8, 6, 1);
 		level.add(enemy);
+		enemy.initialize(level);
+		
+		Enemy enemy2 = new Enemy(4, 10, 0);
+		level.add(enemy2);
+		enemy2.initialize(level);
 	
 		
 		this.addKeyListener(keyboard); // Adds the keyboard listener to the canvas

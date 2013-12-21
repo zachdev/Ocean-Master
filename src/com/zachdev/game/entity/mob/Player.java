@@ -1,10 +1,5 @@
 package com.zachdev.game.entity.mob;
 
-import java.awt.event.KeyEvent;
-
-import com.zachdev.game.Game;
-import com.zachdev.game.entity.Projectile;
-import com.zachdev.game.entity.ShipProjectile;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
 import com.zachdev.game.input.Keyboard;

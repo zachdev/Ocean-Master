@@ -2,24 +2,22 @@ package com.zachdev.game.level;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.zachdev.game.entity.Entity;
 import com.zachdev.game.graphics.Screen;
-import com.zachdev.game.graphics.Sprite;
 import com.zachdev.game.level.tile.Tile;
 
 public class Level {
 	
-	public static final int TILE_SIZE = 16;
+	private static final int TILE_SIZE = Tile.TILE_SIZE;
 	
-	public int width, height;
-	
-	protected int[] tiles;
-	
-	private int animate = 0;
+	private int animate = 0;	// Used for the background animation
 	
 	private List<Entity> entities = new ArrayList<Entity>();		// A list of all entities on the level
+	
+	protected int width, height;
+	
+	protected int[] tiles;
 	
 	/**
 	 * Constructor that instantiates a new Level with a given width and height (in tile precision)
@@ -57,7 +55,7 @@ public class Level {
 	 */
 	public void tick() {
 		
-		if (animate < 10000) {
+		if (animate < 10000) {		// Here we have a limit on animate, so it doesn't keep incrementing until a crash
 			
 			animate++;				// Increase animation count
 		}else {
@@ -81,10 +79,10 @@ public class Level {
 		// Corner pins - x,y coordinates of top left and bottom right corners of the rendering area
 		
 		int x0	= xScroll / TILE_SIZE;					// leftmost X coordinate of the screen area we are rendering
-		int x1 = (xScroll + screen.width + 16) / TILE_SIZE; 	// rightmost X coordinate of the screen area we are rendering
+		int x1 = (xScroll + screen.width + TILE_SIZE) / TILE_SIZE; 	// rightmost X coordinate of the screen area we are rendering
 		
 		int y0 = yScroll / TILE_SIZE;					// leftmost y coordinate
-		int y1 = (yScroll + screen.height + 16) / TILE_SIZE;	// rightmost x coordinate
+		int y1 = (yScroll + screen.height + TILE_SIZE) / TILE_SIZE;	// rightmost x coordinate
 		
 		
 		for (int y = y0; y < y1; y++) { 			// Loops through the rendered window space and renders the tiles
@@ -116,18 +114,20 @@ public class Level {
 	 */
 	public Tile getTile(int x, int y) {
 		
+		int pixelLocation = x + y * width;
+		
 		
 		if (x < 0 || y < 0 || x >= width || y >= height) {			// If we exceed the tile index just return a void tile
 			
 			return Tile.voidTile;
 		}
 		
-		if (tiles[x + y * width]== 0xFF666699) {
+		if (tiles[pixelLocation]== 0xFF666699) {
 			
 			return Tile.rock;
 		}
 
-		if (tiles[x + y * width]== 0xFF0000cc) {
+		if (tiles[pixelLocation]== 0xFF0000cc) {
 	
 			//System.out.println(animate % 90 == 2);
 			

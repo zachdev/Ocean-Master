@@ -30,15 +30,17 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static String title = "Ocean Master";
+	private static final String GAME_TITLE = "Ocean Master";
 
-	private static int WINDOW_WIDTH = 300;
+	private static final int WINDOW_WIDTH = 300;
+	private static final int WINDOW_HEIGHT = WINDOW_WIDTH / 16 * 9;
 	
-	private static int WINDOW_HEIGHT = WINDOW_WIDTH / 16 * 9;
+	//private static final int WINDOW_WIDTH = 1280 / 3;
+	//private static final int WINDOW_HEIGHT = 800 / 3;
 	
-	private static int SCALE = 3;
+	private static final int SCALE = 3;
 	
-	public static final int TILE_SIZE = Tile.TILE_SIZE;
+	private static final int TILE_SIZE = Tile.TILE_SIZE;
 	
 	
 	private Thread thread;
@@ -64,15 +66,9 @@ public class Game extends Canvas implements Runnable {
 	private boolean running = false;
 	
 	
-	int frames = 0; // Tracks how many times render() gets called per second
+	private int frames = 0; // Tracks how many times render() gets called per second
 	
-	int ticks = 0;	// Tracks how many times tick() is called per sec. Should be 60 at all times (60 fps)
-
-	
-	int x = 0;
-	int y = 0;
-	
-	long fpsUpdateTime = System.currentTimeMillis();
+	private int ticks = 0;	// Tracks how many times tick() is called per sec. Should be 60 at all times (60 fps)
 
 	public Game() {
 		
@@ -105,16 +101,17 @@ public class Game extends Canvas implements Runnable {
 		
 		this.addKeyListener(keyboard); // Adds the keyboard listener to the canvas
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH * SCALE, WINDOW_HEIGHT * SCALE));	// Set the canvas size
+
 		
 		frame.setResizable(false);
-		frame.setTitle(Game.title);
+		frame.setTitle(Game.GAME_TITLE);
 		frame.add(this);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		
+		this.requestFocus(); // request focus for the game window (so we can move without clicking first)
 	}
 	
 	/**
@@ -123,7 +120,7 @@ public class Game extends Canvas implements Runnable {
 	public synchronized void start() {
 		
 		running = true;
-		thread = new Thread(this, "Display");
+		thread = new Thread(this, "DisplayThread");
 		thread.start();
 	}
 	
@@ -153,21 +150,19 @@ public class Game extends Canvas implements Runnable {
 		
 		long timer = System.currentTimeMillis();
 		
-		final double ns = 1000000000.0 / 60.0; // 60 frames per second
+		final double frameRate = 1000000000.0 / 60.0; // 60 frames per second, update every 17 milliseconds (1 second / 60)
 		
 		double delta = 0; // Delta time
 		
 		frames = 0; // Tracks how many times render() gets called per second
 		
-		ticks = 0;	// Tracks how many times tick() is called per sec. Should be 60 at all times (60 fps)
+		ticks = 0;	// Tracks how many times tick() is called per sec. Should be 60 at all times
 		
-		
-		requestFocus(); // request focus for the canvas window (so we can move without clicking first)
 		// The game loop
 		while (running) {
 			
 			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
+			delta += (now - lastTime) / frameRate;
 			lastTime = now;
 			
 			while (delta >= 1) {		// This will only update 60 times per second
@@ -185,7 +180,8 @@ public class Game extends Canvas implements Runnable {
 				
 				timer += 1000;
 				//System.out.println(ticks + " fps, " + frames + " ticks/sec");
-				frame.setTitle(Game.title + "" + ticks + " fps, " + frames + " ticks/sec");
+				
+				frame.setTitle(String.format("%s | Resolution: %dx%d | %d ticks/sec, %d fps", Game.GAME_TITLE, WINDOW_WIDTH * SCALE, WINDOW_HEIGHT * SCALE, ticks, frames));
 				ticks = 0;
 				frames = 0;
 			}
@@ -204,31 +200,29 @@ public class Game extends Canvas implements Runnable {
 		keyboard.tick(); 			// Update the keyboard input
 		player.tick();				// Update player logic
 		level.tick();				// Update level logic
-
-		
-		if (player.x < 0) player.x = 0;					// Temporary Player constraints
-		if (player.y < 0) player.y = 0;
-		if (player.x > 1008) player.x = 1008;
-		if (player.y > 1008) player.y = 1008;
-		
 	}
 	/**
 	 * Renders everything on the screen (gets called 200+ (limitless) times per sec)
 	 */
 	public void render() {
 		
-		BufferStrategy bs = getBufferStrategy();		// Grab the buffer strategy from the Canvas superclass
+		BufferStrategy buffer = getBufferStrategy();		// Grab the buffer strategy from the Canvas superclass
 		
-		if (bs == null) {								// If the buffer strategy hasn't been created 
+		if (buffer == null) {								// If the buffer strategy hasn't been created 
 			
-			createBufferStrategy(3);					// Create Triple buffering
+			createBufferStrategy(2);					// Create double buffering strategy
 			return;
 		}
 		
 		screen.clear();									// Clear the screen right before each render
 		
+		
+		
 		int xScroll = player.x - screen.width / 2;		// Sets the offset of the map to the player
-		int yScroll = player.y - screen.height / 2;		
+		int yScroll = player.y - screen.height / 2;	
+		
+		
+		
 		
 		level.render(xScroll, yScroll, screen); 		// Renders the level
 		player.render(screen);							// Renders the player
@@ -239,7 +233,7 @@ public class Game extends Canvas implements Runnable {
 			pixels[i] = screen.pixels[i];
 		}
 		
-		Graphics g = bs.getDrawGraphics();				// Fetch from buffer
+		Graphics g = buffer.getDrawGraphics();				// Fetch from buffer
 		
 		// All graphics work between here and g.dispose()
 		g.setColor(Color.BLACK);						// Set screen to black initially
@@ -251,10 +245,10 @@ public class Game extends Canvas implements Runnable {
 		// For debugging
 		g.setFont(new Font("Verdana", 0, 36));				
 		g.drawString("X: " + player.x + " Y: " + player.y, 1, 36);
-		g.drawString(String.format("Tile (%d, %d)", player.x/16, player.y/16), 1, 73);
+		g.drawString(String.format("Tile (%d, %d)", player.x / TILE_SIZE, player.y / TILE_SIZE), 1, 73);
 		
 		g.dispose(); // Releases all graphics/resources in the frame
-		bs.show();
+		buffer.show();
 	}
 	
 	public static void main(String[] args) {

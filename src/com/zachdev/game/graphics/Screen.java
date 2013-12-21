@@ -1,7 +1,5 @@
 package com.zachdev.game.graphics;
 
-import java.util.Random;
-
 import com.zachdev.game.level.tile.Tile;
 
 /**
@@ -11,16 +9,14 @@ import com.zachdev.game.level.tile.Tile;
  */
 public class Screen {
 	
-	public final int MAP_SIZE = 16;
-	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
+	private static final int TILE_SIZE = Tile.TILE_SIZE;
+	private static final int MAP_SIZE_MASK = TILE_SIZE - 1;
 	
 	public int width, height;
 	
 	public int[] pixels;
 	
-	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; 
-	
-	private Random random = new Random();
+	public int[] tiles = new int[TILE_SIZE * TILE_SIZE]; 
 	
 	public int xOffset, yOffset;
 	
@@ -63,26 +59,7 @@ public class Screen {
 				
 				int tileIndex = ((xp / 16) & MAP_SIZE_MASK) + ((yp / 16) & MAP_SIZE_MASK) * 8;  // Finds the tile index from x,y coords. Tile size is 8 x 8
 				
-				// Show some different tiles for testing
-				if (tileIndex == 41 || tileIndex == 14 || tileIndex == 29) {
-					
-					pixels[x + y * width] = Sprite.brick.pixels[(x & 15) + (y & 15) * Sprite.brick.size];
-				}
 				
-				else if (tileIndex == 36 || tileIndex == 45 || tileIndex == 59) {
-					
-					pixels[x + y * width] = Sprite.water.pixels[(x & 15) + (y & 15) * Sprite.water.size];
-				}
-				
-				else if (tileIndex == 56 || tileIndex == 22 || tileIndex == 7) {
-					
-					pixels[x + y * width] = Sprite.dirt.pixels[(x & 15) + (y & 15) * Sprite.dirt.size];
-				}
-				
-				else {
-					
-					pixels[x + y * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.size];
-				}
 				
 			}
 		}
@@ -111,7 +88,7 @@ public class Screen {
 				
 				int color = tile.sprite.pixels[x + y * tile.sprite.size];
 				
-				pixels[xa + ya * width] = color; 
+				//pixels[xa + ya * width] = color; 
 				
 				if (color != 0xFFFFFF) {	// If the tile background is white don't render it
 					

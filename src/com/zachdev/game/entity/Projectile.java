@@ -19,8 +19,6 @@ public abstract class Projectile extends Entity {
 		xOrigin = x;
 		yOrigin = y;
 		
-		angle = direction;
-		
 		this.x = x;
 		this.y = y;
 		

@@ -6,14 +6,15 @@ import com.zachdev.game.level.tile.Tile;
 
 public class ShipProjectile extends Projectile {
 	
+	private int direction;
+	
 
 	public ShipProjectile(int x, int y, int direction) {
 		super(x, y, direction);
-		System.out.println(direction);
 		range = 200;
 		damage = 20;
 		rateOfFire = 15;
-		angle = direction;
+		this.direction = direction;
 		
 		sprite = Sprite.bomb;
 		
@@ -28,8 +29,15 @@ public class ShipProjectile extends Projectile {
 	
 	protected void move() {
 		
-		x += nx;
-		y += ny;
+		//System.out.println(direction);
+		
+		if (direction == 0) y--; 
+		if (direction == 2) y++; 
+		if (direction == 3) x++; 
+		if (direction == 1) x--; 
+		
+		//x++;
+		//y += ny;
 	}
 	
 	public void render(Screen screen) {

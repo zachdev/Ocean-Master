@@ -31,7 +31,7 @@ public class Tile {
 	}
 	
 	public void render(int x, int y, Screen screen) {
-							// Actual rendering is done in the subclasses
+		// Actual rendering is done in the Tile subclasses
 	}
 		
 	

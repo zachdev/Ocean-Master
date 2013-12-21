@@ -2,14 +2,18 @@ package com.zachdev.game.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.security.KeyStore.LoadStoreParameter;
-
 import javax.imageio.ImageIO;
 
-import com.zachdev.game.entity.mob.Enemy;
-import com.zachdev.game.level.tile.Tile;
 
+/**
+ * Used when loading a level from an image
+ * 
+ * Reads an image of N x N pixels, and based on the color of each pixel
+ * chooses a corresponding tile
+ * 
+ * @author zach
+ *
+ */
 public class LoadedLevel extends Level {
 
 
@@ -48,21 +52,6 @@ public class LoadedLevel extends Level {
 		
 		
 		
-	}
-	
-	/**
-	 * Converts pixels into tiles
-	 * 
-	 * Rock = 0x666699
-	 * Water = 0x0000cc
-	 */
-	protected void generateLevel() {
-		
-		//System.out.println("Tiles: " + tiles[0]);
-		
-		
-	}
-	
-	
+	}	
 
 }

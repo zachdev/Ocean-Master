@@ -8,7 +8,7 @@ import com.zachdev.game.entity.Projectile;
 import com.zachdev.game.entity.ShipProjectile;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
-import com.zachdev.game.level.Level;
+import com.zachdev.game.level.tile.Tile;
 
 /**
  * Handles the movement of the mob, as well as other Mob characteristics
@@ -18,7 +18,7 @@ import com.zachdev.game.level.Level;
  */
 public abstract class Mob extends Entity {
 	
-	private static final int TILE_SIZE = Level.TILE_SIZE;
+	private static final int TILE_SIZE = Tile.TILE_SIZE;
 	
 	protected Sprite sprite;
 	
@@ -52,10 +52,22 @@ public abstract class Mob extends Entity {
 			return;
 		}
 		
-		if (x0 > 0) mobDirection = Direction.RIGHT;		// Right
-		if (x0 < 0) mobDirection = Direction.LEFT;		// Left
-		if (y0 > 0) mobDirection = Direction.DOWN;		// Down
-		if (y0 < 0) mobDirection = Direction.UP;		// Up
+		if (x0 > 0) {
+			direction = 3;
+			mobDirection = Direction.RIGHT;		// Right
+		}
+		if (x0 < 0) {
+			direction = 1;
+			mobDirection = Direction.LEFT;		// Left
+		}
+		if (y0 > 0) {
+			direction = 2;
+			mobDirection = Direction.DOWN;		// Down
+		}
+		if (y0 < 0) {
+			direction = 0;
+			mobDirection = Direction.UP;		// Up
+		}
 
 		if (!collision(x0, y0)) { // If there's no collision, we increase x and y variables (mob location)
 			// -1, 0, or 1
@@ -69,9 +81,11 @@ public abstract class Mob extends Entity {
 	}
 	
 	
-	protected void shoot(int x, int y, double direction) {
+	protected void shoot(int x, int y, int direction) {
 		
-		Projectile p = new ShipProjectile(this.x,  this.y, 2);
+		//System.out.println("direction: " + this.direction);
+		
+		Projectile p = new ShipProjectile(this.x,  this.y, this.direction);
 		projectiles.add(p);
 		level.add(p);
 		
@@ -95,9 +109,11 @@ public abstract class Mob extends Entity {
 			
 			int yt = ((y + ya) + corner / 2 * 2 + 8) / TILE_SIZE;
 			
+			String tileName = level.getTile(xt, yt).getClass().getSimpleName();
+			
 			if (level.getTile(xt, yt).solid()) solid = true;	// We look at the tile just ahead of our Mob
 			
-			if (solid) System.out.println("Collision");	
+			if (solid) System.out.println("Collision with " + tileName);	
 			
 		}
 

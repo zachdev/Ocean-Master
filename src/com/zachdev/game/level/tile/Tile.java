@@ -23,6 +23,27 @@ public class Tile {
 	
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 	
+	
+	public static Tile waterEdgeTopLeft = new LandTile(Sprite.waterEdgeTopLeft); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeTopMiddle = new LandTile(Sprite.waterEdgeTopMiddle); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeTopRight = new LandTile(Sprite.waterEdgeTopRight); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeMiddleLeft = new LandTile(Sprite.waterEdgeMiddleLeft); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeMiddleRight = new LandTile(Sprite.waterEdgeMiddleRight); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeBottomLeft = new LandTile(Sprite.waterEdgeBottomLeft); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeBottomMiddle = new LandTile(Sprite.waterEdgeBottomMiddle); // Static object - water tile grabbed from Sprite class
+	public static Tile waterEdgeBottomRight = new LandTile(Sprite.waterEdgeBottomRight); // Static object - water tile grabbed from Sprite class
+
+	public static Tile sand = new LandTile(Sprite.sand); // Static object - water tile grabbed from Sprite class
+	
+	public static Tile islandTree = new RockTile(Sprite.islandTree); // Static object - water tile grabbed from Sprite class
+
+
+	
+	
+	
+	
+	
+	
 	public Tile(Sprite sprite) {
 		
 		this.sprite = sprite;

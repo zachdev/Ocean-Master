@@ -26,6 +26,24 @@ public class Sprite {
 	
 	public static Sprite bomb = new Sprite(16, 5, 0, SpriteSheet.tiles);
 	
+	public static Sprite islandTree = new Sprite(16, 0, 1, SpriteSheet.tiles);
+	
+	public static Sprite waterEdgeTopLeft = new Sprite(16, 0, 3, SpriteSheet.tiles);
+	public static Sprite waterEdgeTopMiddle = new Sprite(16, 1, 3, SpriteSheet.tiles);
+	public static Sprite waterEdgeTopRight = new Sprite(16, 3, 3, SpriteSheet.tiles);
+	public static Sprite waterEdgeMiddleLeft = new Sprite(16, 0, 4, SpriteSheet.tiles);
+	public static Sprite sand = new Sprite(16, 1, 4, SpriteSheet.tiles);
+	public static Sprite waterEdgeMiddleRight = new Sprite(16, 3, 4, SpriteSheet.tiles);
+	public static Sprite waterEdgeBottomLeft = new Sprite(16, 0, 6, SpriteSheet.tiles);
+	public static Sprite waterEdgeBottomMiddle = new Sprite(16, 1, 6, SpriteSheet.tiles);
+	public static Sprite waterEdgeBottomRight = new Sprite(16, 3, 6, SpriteSheet.tiles);
+
+	
+	
+	
+	
+	
+	
 	public static Sprite playerUp = new Sprite(16, 0, 12, SpriteSheet.tiles);
 	public static Sprite playerDown = new Sprite(16, 0, 14, SpriteSheet.tiles);
 	public static Sprite playerLeft = new Sprite(16, 0, 15, SpriteSheet.tiles);

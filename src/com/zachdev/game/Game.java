@@ -84,7 +84,7 @@ public class Game extends Canvas implements Runnable {
 		
 
 		
-		level = new LoadedLevel("/graphics/level.png");
+		level = new LoadedLevel("/graphics/level2.png");
 		
 		//level = new RandomLevel(64, 64);
 		

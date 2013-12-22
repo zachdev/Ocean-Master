@@ -9,10 +9,14 @@ public class Enemy extends Mob {
 	private int time = 0; // incremented 60 times per second ie, time % 60 == 0
 							// = 1 time/sec
 	
-	int[] shootingTime = {100, 200, 300};
+	private int[] shootingTime = {100, 200, 300};
 
 	private int xa = 0;
 	private int ya = 0;
+	
+	private int collisions = 0;
+	
+	private int[] directions = {-1, 1};
 
 	public Enemy(int x, int y, int dir) {
 
@@ -57,8 +61,28 @@ public class Enemy extends Mob {
 		if (ya < -1)
 			ya = -1;
 		
+		// If we collide with something multiple times we change direction
+		if (collisions > 2) {
+			
+			if (xa == 0) {
+				
+				xa = directions[random.nextInt(1)];
+				ya = 0;
+			}
+			
+			else if (ya == 0) {
+				
+				ya = directions[random.nextInt(1)];;
+				xa = 0;
+			}
+			
+			collisions = 0;
+			
+		}
+		
 		if (collision(xa, ya)) {
 			
+			collisions++;
 			xa = -xa;
 			ya = -ya;
 		}
@@ -72,6 +96,22 @@ public class Enemy extends Mob {
 
 			xa = -xa;
 			ya = -ya;
+		}
+		
+		//Randomly change axis (x to y, y to x)
+		if (time % shootingTime[random.nextInt(3)] == 0) {
+
+			if (xa == 0) {
+				
+				xa = directions[random.nextInt(1)];
+				ya = 0;
+			}
+			
+			else if (ya == 0) {
+				
+				ya = directions[random.nextInt(1)];;
+				xa = 0;
+			}
 		}
 
 		if (time % 2 == 0) {

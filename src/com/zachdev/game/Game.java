@@ -94,6 +94,7 @@ public class Game extends Canvas implements Runnable {
 		
 		
 		player.initialize(level);
+		level.add(player);
 		
 		
 		enemy = new Enemy(8, 6, 1);
@@ -108,7 +109,7 @@ public class Game extends Canvas implements Runnable {
 		level.add(enemy3);
 		enemy3.initialize(level);
 		
-		Enemy enemy4 = new Enemy(10, 10, 0);
+		Enemy enemy4 = new Enemy(10, 15, 0);
 		level.add(enemy4);
 		enemy4.initialize(level);
 		
@@ -211,8 +212,8 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {
 		
 		keyboard.tick(); 			// Update the keyboard input
-		player.tick();				// Update player logic
-		level.tick();				// Update level logic
+		//player.tick();				// Update player logic
+		level.tick();				// Update level entities (including player and mobs)
 	}
 	/**
 	 * Renders everything on the screen (gets called 200+ (limitless) times per sec)

@@ -19,7 +19,7 @@ public class ShipProjectile extends Projectile {
 		rateOfFire = 15;
 		this.direction = direction;
 
-		sprite = Sprite.bomb;
+		sprite = Sprite.cannonBall;
 
 		nx = speed * angle;
 		ny = speed * angle;
@@ -29,8 +29,9 @@ public class ShipProjectile extends Projectile {
 		
 		if (collision(x,y)) {
 			
-			System.out.println("boom");
-			this.remove();
+			//System.out.println("boom");
+			//this.remove();
+			this.explode();
 		}
 
 		if (distanceTraveled >= range) {
@@ -76,6 +77,16 @@ public class ShipProjectile extends Projectile {
 
 		screen.renderTile(x, y, Tile.bomb);
 
+	}
+	
+	private void explode() {	// not working right yet
+		
+		this.sprite = Sprite.explosion1;
+		this.sprite = Sprite.explosion2;
+		this.sprite = Sprite.explosion3;
+		this.sprite = Sprite.explosion4;
+		this.sprite = Sprite.explosion5;
+		this.remove();
 	}
 
 	public boolean collision(int xa, int ya) {

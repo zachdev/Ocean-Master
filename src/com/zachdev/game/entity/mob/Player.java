@@ -1,8 +1,13 @@
 package com.zachdev.game.entity.mob;
 
+import com.zachdev.game.entity.Entity;
+import com.zachdev.game.entity.Projectile;
+import com.zachdev.game.entity.ShipProjectile;
+import com.zachdev.game.entity.mob.Mob.Direction;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
 import com.zachdev.game.input.Keyboard;
+import com.zachdev.game.level.tile.Tile;
 
 public class Player extends Mob {
 	
@@ -13,6 +18,8 @@ public class Player extends Mob {
 	private int animate = 0;
 	
 	private boolean moving = false;
+	
+	private boolean visible = true;
 	
 	private long timer = System.currentTimeMillis();
 	
@@ -52,20 +59,56 @@ public class Player extends Mob {
 		}
 		
 		
+		
+		
 		if (input.up) ya--;
 		if (input.down) ya++;
 		if (input.left) xa--;
 		if (input.right) xa++;
+	
 		
-		if (animate % 20 < 10) {
+		if (input.disembark) {
 			
-			if(input.shooting) {		// If we are pressing the space bar
+			
+			Tile[] adjacentTiles = new Tile[4];
+			
+			adjacentTiles[0] = level.getTile((x / TILE_SIZE), (y / TILE_SIZE) - TILE_SIZE / 8); // up tile
+			adjacentTiles[1] = level.getTile((x / TILE_SIZE), (y / TILE_SIZE) + TILE_SIZE / 8); // down tile
+			adjacentTiles[2] = level.getTile((x / TILE_SIZE) - TILE_SIZE / 8, (y / TILE_SIZE)); // left tile
+			adjacentTiles[3] = level.getTile((x / TILE_SIZE) + TILE_SIZE / 8, (y / TILE_SIZE)); // right tile
+			
+			for (int i = 0; i < adjacentTiles.length; i++) {
 				
-				if (System.currentTimeMillis() - timer > 200) { // Only allow one shot per 200 millisec
+				if (adjacentTiles[i].getClass().getSimpleName().equals("LandTile")) {
 					
-					timer = System.currentTimeMillis();
-					shoot(x, y, direction);	
+					//this.x = adjacentTiles[i].x / 16;
+					//this.y = adjacentTiles[i].y / 16;
+					//System.out.println(x / TILE_SIZE + " " + y / TILE_SIZE);
+					System.out.println(level.getTile(x / TILE_SIZE, y / TILE_SIZE + 1));
+					//System.out.println(adjacentTiles[i].y);
+					System.out.println("Disembarkable");
+					y = y + 2;
+					this.sprite = Sprite.brick;
+				
 				}
+			}
+
+			
+			
+			//String tileName = level.getTile((x / TILE_SIZE), (y / TILE_SIZE) + TILE_SIZE / 2).getClass().getSimpleName(); // check underneath
+			
+			//System.out.println(tileName);
+			
+			
+		}
+		
+		
+		if(input.shooting) {		// If we are pressing the space bar
+			
+			if (System.currentTimeMillis() - timer > 200) { // Only allow one shot per 200 millisec
+				
+				timer = System.currentTimeMillis();
+				shoot(x, y, direction);	
 			}
 		}
 		
@@ -81,6 +124,60 @@ public class Player extends Mob {
 		//updateShooting();
 		
 		
+	}
+	
+	public void move(int x0, int y0) {
+
+		/*
+		 * If we are advancing on 2 axis, we run each one separately so we can
+		 * process collision separately for each axis
+		 */
+		if (x0 != 0 && y0 != 0) {
+
+			move(x0, 0); // Enables collision sliding because we are moving each
+							// coordinate separately
+			move(0, y0);
+			return;
+		}
+
+		if (x0 > 0) {
+			direction = 3;
+			mobDirection = Direction.RIGHT; // Right
+		}
+		if (x0 < 0) {
+			direction = 1;
+			mobDirection = Direction.LEFT; // Left
+		}
+		if (y0 > 0) {
+			direction = 2;
+			mobDirection = Direction.DOWN; // Down
+		}
+		if (y0 < 0) {
+			direction = 0;
+			mobDirection = Direction.UP; // Up
+		}
+
+		if (!collision(x0, y0)) { // If there's no collision, we increase x and
+									// y variables (mob location)
+			// -1, 0, or 1
+			x += x0;
+
+			y += y0;
+
+			//System.out.printf("Player Location: (%d, %d)%n", x / 16, y / 16);
+		}
+
+	}
+	
+	protected void shoot(int x, int y, int direction) {
+
+		Projectile p = new ShipProjectile(this.x, this.y, this.direction);
+		p.initialize(level);
+		projectiles.add(p);
+		level.add(p);
+
+		// System.out.println("Shooting!");
+
 	}
 	
 	private void updateShooting() {

@@ -17,10 +17,58 @@ public class SpriteSheet {
 	
 	private String path;
 	
+	protected int width, height;
+	
 	public int size;
 	
 	public int[] pixels;
 
+	public Sprite[] sprites;
+
+	
+	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
+		
+		int xx = x * spriteSize;
+		int yy = y * spriteSize;
+		
+		int w = width * spriteSize;
+		int h = height * spriteSize;
+		
+		if (width == height) {
+			
+			this.size = width;
+		}
+		else {
+			this.size = -1;
+		}
+		
+		this.width = w;
+		this.height = h;
+		
+		pixels = new int[w * h];
+		
+		for (int y0 = 0; y0 < h; y0++) {
+			
+			int yp = yy + y0;
+			
+			for (int x0 = 0; x0 < w; x0++) {
+				
+				int xp = xx + x0;
+				
+				pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.width];
+			}
+		}
+		
+		for (int y0 = 0; y0 < this.height; y0++) {
+			
+			for (int x0 = 0; x0 < this.width; x0++) {
+				
+				//Sprite sprite = new Sprite()
+				
+				
+			}
+		}
+	}
 	
 	public SpriteSheet(String path, int size) {
 		
@@ -31,6 +79,11 @@ public class SpriteSheet {
 		
 		loadSprite();
 	
+	}
+	
+	public Sprite[] getSprite() {
+		
+		return null;
 	}
 	
 	private void loadSprite() {

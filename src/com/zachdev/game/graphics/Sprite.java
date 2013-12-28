@@ -13,7 +13,9 @@ public class Sprite {
 	
 	public int[] pixels;
 	
-	private SpriteSheet sheet;
+	protected SpriteSheet sheet;
+	
+	protected int width, height;
 	
 	public static Sprite voidSprite = new Sprite(16, 0); // Creates a tile with all black colors
 	
@@ -24,7 +26,7 @@ public class Sprite {
 	public static Sprite dirt = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite rock = new Sprite(16, 4, 0, SpriteSheet.tiles);
 	
-	public static Sprite bomb = new Sprite(16, 5, 0, SpriteSheet.tiles);
+	public static Sprite cannonBall = new Sprite(16, 5, 0, SpriteSheet.tiles);
 	
 	public static Sprite islandTree = new Sprite(16, 0, 1, SpriteSheet.tiles);
 	
@@ -37,22 +39,14 @@ public class Sprite {
 	public static Sprite waterEdgeBottomLeft = new Sprite(16, 0, 6, SpriteSheet.tiles);
 	public static Sprite waterEdgeBottomMiddle = new Sprite(16, 1, 6, SpriteSheet.tiles);
 	public static Sprite waterEdgeBottomRight = new Sprite(16, 3, 6, SpriteSheet.tiles);
+	
+	
+	public static Sprite explosion1 = new Sprite(16, 0, 2, SpriteSheet.tiles);
+	public static Sprite explosion2 = new Sprite(16, 1, 2, SpriteSheet.tiles);
 
-	
-	
-	
-	
-	
-	
-	public static Sprite playerUp = new Sprite(16, 0, 12, SpriteSheet.tiles);
-	public static Sprite playerDown = new Sprite(16, 0, 14, SpriteSheet.tiles);
-	public static Sprite playerLeft = new Sprite(16, 0, 15, SpriteSheet.tiles);
-	public static Sprite playerRight = new Sprite(16, 0, 13, SpriteSheet.tiles);
-	
-	public static Sprite playerUp1 = new Sprite(16, 1, 12, SpriteSheet.tiles);			// Player animations
-	public static Sprite playerDown1 = new Sprite(16, 1, 14, SpriteSheet.tiles);
-	public static Sprite playerLeft1 = new Sprite(16, 1, 15, SpriteSheet.tiles);
-	public static Sprite playerRight1 = new Sprite(16, 1, 13, SpriteSheet.tiles);
+	public static Sprite explosion3 = new Sprite(16, 2, 2, SpriteSheet.tiles);
+	public static Sprite explosion4 = new Sprite(16, 3, 2, SpriteSheet.tiles);
+	public static Sprite explosion5 = new Sprite(16, 4, 2, SpriteSheet.tiles);
 	
 	public static Sprite enemyUp = new Sprite(16, 0, 8, SpriteSheet.tiles);				// Enemy tiles and animations
 	public static Sprite enemyDown = new Sprite(16, 0, 10, SpriteSheet.tiles);
@@ -64,9 +58,47 @@ public class Sprite {
 	public static Sprite enemyLeft1 = new Sprite(16, 1, 11, SpriteSheet.tiles);
 	public static Sprite enemyRight1 = new Sprite(16, 1, 9, SpriteSheet.tiles);
 	
+	
+	// For loading an individual sprite from a pixels array
+	public Sprite(int[] pixels, int width, int height) {
+		
+		if (width == height) this.size = width;
+		else this.size = -1;
+		
+		this.height = height;
+		this.width = width;
+		
+		this.pixels = pixels;
+	}
+	
+	public Sprite(int size, SpriteSheet sheet) {
+		
+		if (this.width == this.height) this.size = width;
+		else this.size = -1;
+		
+		this.width = size;
+		this.height = size;
+		this.sheet = sheet;
+		
+		
+	}
+	
+	public Sprite (SpriteSheet sheet, int width, int height) {
+		
+		if (width == height) this.size = width;
+		else this.size = -1;
+		
+		this.sheet = sheet;
+		this.width = width;
+		this.height = height;
+	}
+	
 	public Sprite(int size, int x, int y, SpriteSheet spriteSheet) {
 		
 		pixels = new int[size * size]; 		// Creates pixel array of sprite size
+		
+		this.width = size;
+		this.height = size;
 		
 		this.size = size;
 		this.x = x * size; 					// Gets sprite grid location from x, y pixels coordinates

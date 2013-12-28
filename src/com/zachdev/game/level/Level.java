@@ -69,6 +69,7 @@ public class Level {
 		for (int i = 0; i < entities.size(); i++) { // Update all entities
 
 			entities.get(i).tick();
+			
 		}
 
 		remove();
@@ -221,6 +222,11 @@ public class Level {
 
 		return Tile.voidTile; // Return a void tile if nothing else
 
+	}
+	
+	public List<Entity> getEntities() {
+		
+		return entities;
 	}
 
 	private void time() {

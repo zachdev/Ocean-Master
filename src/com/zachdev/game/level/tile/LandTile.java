@@ -6,11 +6,7 @@ public class LandTile extends Tile {
 
 	public LandTile(Sprite sprite) {
 		super(sprite);
-	}
-	
-	public boolean solid() {
-		
-		return true;
+		// TODO Auto-generated constructor stub
 	}
 
 }

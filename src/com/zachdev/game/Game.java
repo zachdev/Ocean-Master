@@ -1,7 +1,5 @@
 package com.zachdev.game;
 
-import javax.swing.*;
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,8 +9,16 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import javax.swing.JFrame;
+
+import com.zachdev.game.entity.mob.BlueWizard;
 import com.zachdev.game.entity.mob.Enemy;
+import com.zachdev.game.entity.mob.GreenWizard;
+import com.zachdev.game.entity.mob.OldMan;
 import com.zachdev.game.entity.mob.Player;
+import com.zachdev.game.entity.mob.RedWizard;
+import com.zachdev.game.entity.mob.Wizard;
+import com.zachdev.game.entity.vehicle.PlayerShip;
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.input.Keyboard;
 import com.zachdev.game.level.Level;
@@ -35,8 +41,7 @@ public class Game extends Canvas implements Runnable {
 	private static final int WINDOW_WIDTH = 400;
 	private static final int WINDOW_HEIGHT = WINDOW_WIDTH / 16 * 9;
 	
-	//private static final int WINDOW_WIDTH = 1280 / 3;
-	//private static final int WINDOW_HEIGHT = 800 / 3;
+	private final double frameRate = 1000000000.0 / 60.0; // 60 frames per second, update every 17 milliseconds
 	
 	private static final int SCALE = 3;
 	
@@ -55,7 +60,14 @@ public class Game extends Canvas implements Runnable {
 	
 	private Player player;
 	
+	private PlayerShip playerShip;
+	
 	private Enemy enemy;
+	
+	
+	private Wizard blueWizard, greenWizard, redWizard;
+	
+	private OldMan oldMan;
 	
 
 	
@@ -88,12 +100,44 @@ public class Game extends Canvas implements Runnable {
 		
 		//level = new RandomLevel(64, 64);
 		
-		TileCoordinate playerSpawnLocation = new TileCoordinate(6,5);		
+		TileCoordinate playerSpawnLocation = new TileCoordinate(10,49);	
+		TileCoordinate playerShipSpawnLocation = new TileCoordinate(10,47);	
+		
+		TileCoordinate blueWizardSpawnLocation = new TileCoordinate(8,49);
+		TileCoordinate greenWizardSpawnLocation = new TileCoordinate(12,53);	
+
+		TileCoordinate redWizardSpawnLocation = new TileCoordinate(7, 55);	
+		
+		TileCoordinate oldManSpawnLocation = new TileCoordinate(10, 54);	
+
+
+	
+
 		
 		player = new Player(playerSpawnLocation.getX(), playerSpawnLocation.getY(), keyboard);	// Spawn player at tile 6,5 
+		playerShip = new PlayerShip(playerShipSpawnLocation.getX(), playerShipSpawnLocation.getY(), keyboard);
 		
+		level.add(playerShip);
+		playerShip.initialize(level);
 		
 		player.initialize(level);
+		level.add(player);
+		
+		blueWizard = new BlueWizard(blueWizardSpawnLocation.getX(), blueWizardSpawnLocation.getY());
+		level.add(blueWizard);
+		blueWizard.initialize(level);
+		
+		greenWizard = new GreenWizard(greenWizardSpawnLocation.getX(), greenWizardSpawnLocation.getY());
+		level.add(greenWizard);
+		greenWizard.initialize(level);
+		
+		redWizard = new RedWizard(redWizardSpawnLocation.getX(), redWizardSpawnLocation.getY());
+		level.add(redWizard);
+		redWizard.initialize(level);
+		
+		oldMan = new OldMan(oldManSpawnLocation.getX(), oldManSpawnLocation.getY());
+		level.add(oldMan);
+		oldMan.initialize(level);
 		
 		
 		enemy = new Enemy(8, 6, 1);
@@ -108,7 +152,7 @@ public class Game extends Canvas implements Runnable {
 		level.add(enemy3);
 		enemy3.initialize(level);
 		
-		Enemy enemy4 = new Enemy(10, 10, 0);
+		Enemy enemy4 = new Enemy(10, 15, 0);
 		level.add(enemy4);
 		enemy4.initialize(level);
 		
@@ -162,9 +206,7 @@ public class Game extends Canvas implements Runnable {
 		long lastTime = System.nanoTime(); // Get the system time in nanoseconds
 		
 		long timer = System.currentTimeMillis();
-		
-		final double frameRate = 1000000000.0 / 60.0; // 60 frames per second, update every 17 milliseconds (1 second / 60)
-		
+			
 		double delta = 0; // Delta time
 		
 		frames = 0; // Tracks how many times render() gets called per second
@@ -191,9 +233,7 @@ public class Game extends Canvas implements Runnable {
 			
 			if (System.currentTimeMillis() - timer > 1000) { // This will execute once per second
 				
-				timer += 1000;
-				//System.out.println(ticks + " fps, " + frames + " ticks/sec");
-				
+				timer += 1000;				
 				frame.setTitle(String.format("%s | Resolution: %dx%d | %d ticks/sec, %d fps", Game.GAME_TITLE, WINDOW_WIDTH * SCALE, WINDOW_HEIGHT * SCALE, ticks, frames));
 				ticks = 0;
 				frames = 0;
@@ -211,8 +251,7 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {
 		
 		keyboard.tick(); 			// Update the keyboard input
-		player.tick();				// Update player logic
-		level.tick();				// Update level logic
+		level.tick();				// Update level entities (including player and mobs)
 	}
 	/**
 	 * Renders everything on the screen (gets called 200+ (limitless) times per sec)
@@ -232,7 +271,7 @@ public class Game extends Canvas implements Runnable {
 		
 		
 		int xScroll = player.x - screen.width / 2;		// Sets the offset of the map to the player
-		int yScroll = player.y - screen.height / 2;	
+		int yScroll = player.y - screen.height / 2;		// So we can scroll around the map
 		
 		
 		
@@ -251,7 +290,6 @@ public class Game extends Canvas implements Runnable {
 		// All graphics work between here and g.dispose()
 		g.setColor(Color.BLACK);						// Set screen to black initially
 		g.fillRect(0, 0, getWidth(), getHeight());					// Fill the screen
-		
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);	// Draw the screen image
 		g.setColor(Color.WHITE);
 		

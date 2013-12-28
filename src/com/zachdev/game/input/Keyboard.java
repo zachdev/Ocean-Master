@@ -14,7 +14,7 @@ public class Keyboard implements KeyListener{
 	
 	private boolean[] keys = new boolean[120]; // Create array of keys for each key on keyboard
 	
-	public boolean up, down, left, right, shooting;
+	public boolean up, down, left, right, shooting, disembark;
 	
 	public void tick() {
 		
@@ -24,6 +24,8 @@ public class Keyboard implements KeyListener{
 		right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
 		
 		shooting = keys[KeyEvent.VK_SPACE];
+		
+		disembark = keys[KeyEvent.VK_SHIFT];
 		
 		for (int i = 0; i < keys.length; i++) {
 			

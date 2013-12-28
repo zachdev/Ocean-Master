@@ -2,6 +2,10 @@ package com.zachdev.game.entity.mob;
 
 import com.zachdev.game.entity.Projectile;
 import com.zachdev.game.entity.ShipProjectile;
+<<<<<<< HEAD
+=======
+import com.zachdev.game.entity.mob.Mob.Direction;
+>>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.Sprite;
 

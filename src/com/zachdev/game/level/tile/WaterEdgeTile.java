@@ -8,5 +8,12 @@ public class WaterEdgeTile extends Tile {
 		super(sprite);
 	}
 	
+<<<<<<< HEAD
+=======
+	public boolean solid() {
+		
+		return true;
+	}
+>>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 
 }

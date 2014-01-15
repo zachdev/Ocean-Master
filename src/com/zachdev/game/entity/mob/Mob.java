@@ -24,11 +24,8 @@ public abstract class Mob extends Entity {
 	protected int direction = 0; // 0 = north, 1 east, 2 south, 3 west
 
 	protected boolean moving = false;
-<<<<<<< HEAD
 	
 	protected boolean visible = true;
-=======
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 
 	protected List<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -69,12 +66,8 @@ public abstract class Mob extends Entity {
 
 			int yt = ((y + ya) + corner / 2 * 2 + 8) / TILE_SIZE;
 
-<<<<<<< HEAD
 			// String tileName = level.getTile(xt,
 			// yt).getClass().getSimpleName();
-=======
-			String tileName = level.getTile(xt, yt).getClass().getSimpleName();
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 
 			if (level.getTile(xt, yt).solid())
 				solid = true; // We look at the tile just ahead of our Mob
@@ -83,7 +76,6 @@ public abstract class Mob extends Entity {
 			// System.out.println(String.format(" Collision with %s at (%d,%d)",
 			// tileName, x / TILE_SIZE, y / TILE_SIZE));
 
-<<<<<<< HEAD
 		}
 
 		return solid;
@@ -129,8 +121,6 @@ public abstract class Mob extends Entity {
 			
 			newX = (x - (1 * TILE_SIZE - (TILE_SIZE - 1))) / TILE_SIZE;
 			newY = (y / TILE_SIZE);
-=======
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 		}
 
 		if (mobDirection == Direction.RIGHT) {

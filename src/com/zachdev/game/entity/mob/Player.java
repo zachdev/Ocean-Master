@@ -3,13 +3,9 @@ package com.zachdev.game.entity.mob;
 import com.zachdev.game.entity.Entity;
 import com.zachdev.game.entity.Projectile;
 import com.zachdev.game.entity.ShipProjectile;
-<<<<<<< HEAD
 import com.zachdev.game.entity.vehicle.PlayerShip;
 import com.zachdev.game.entity.vehicle.Vehicle;
 import com.zachdev.game.graphics.AnimatedSprite;
-=======
-import com.zachdev.game.entity.mob.Mob.Direction;
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 import com.zachdev.game.graphics.Screen;
 import com.zachdev.game.graphics.SpriteSheet;
 import com.zachdev.game.input.Keyboard;
@@ -44,8 +40,6 @@ public class Player extends Mob {
 
 	private Vehicle vehicle;
 	private PlayerShip playerShip;
-	
-	private boolean visible = true;
 	
 	private long timer = System.currentTimeMillis();
 
@@ -112,7 +106,6 @@ public class Player extends Mob {
 			
 			ya++;
 		}
-<<<<<<< HEAD
 		if (input.left) {
 			if (inVehicle()) {
 				
@@ -149,138 +142,13 @@ public class Player extends Mob {
 					playerShip = (PlayerShip) e;
 				}
 			}
-=======
-		
-		
-		
-		
-		if (input.up) ya--;
-		if (input.down) ya++;
-		if (input.left) xa--;
-		if (input.right) xa++;
-	
-		
-		if (input.disembark) {
 			
 			
-			Tile[] adjacentTiles = new Tile[4];
-			
-			adjacentTiles[0] = level.getTile((x / TILE_SIZE), (y / TILE_SIZE) - TILE_SIZE / 8); // up tile
-			adjacentTiles[1] = level.getTile((x / TILE_SIZE), (y / TILE_SIZE) + TILE_SIZE / 8); // down tile
-			adjacentTiles[2] = level.getTile((x / TILE_SIZE) - TILE_SIZE / 8, (y / TILE_SIZE)); // left tile
-			adjacentTiles[3] = level.getTile((x / TILE_SIZE) + TILE_SIZE / 8, (y / TILE_SIZE)); // right tile
-			
-			for (int i = 0; i < adjacentTiles.length; i++) {
-				
-				if (adjacentTiles[i].getClass().getSimpleName().equals("LandTile")) {
-					
-					//this.x = adjacentTiles[i].x / 16;
-					//this.y = adjacentTiles[i].y / 16;
-					//System.out.println(x / TILE_SIZE + " " + y / TILE_SIZE);
-					System.out.println(level.getTile(x / TILE_SIZE, y / TILE_SIZE + 1));
-					//System.out.println(adjacentTiles[i].y);
-					System.out.println("Disembarkable");
-					y = y + 2;
-					this.sprite = Sprite.brick;
-				
-				}
-			}
-
-			
-			
-			//String tileName = level.getTile((x / TILE_SIZE), (y / TILE_SIZE) + TILE_SIZE / 2).getClass().getSimpleName(); // check underneath
-			
-			//System.out.println(tileName);
-			
-			
-		}
-		
-		
-		if(input.shooting) {		// If we are pressing the space bar
-			
-			if (System.currentTimeMillis() - timer > 200) { // Only allow one shot per 200 millisec
-				
-				timer = System.currentTimeMillis();
-				shoot(x, y, direction);	
-			}
-		}
-		
-		if (xa != 0 || ya != 0) {
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
-			
-			
-<<<<<<< HEAD
 			System.out.println("x: " + x/16 + " shipX: " + playerShip.x/16 + " y: " + y/16 + " shipY: " + playerShip.y/16);
 			boolean sameTile = (x / 16 == playerShip.x/16) && (y / 16 == playerShip.y/16);
 			
 			boolean upTile = y / 16 == playerShip.y  /16 - 1;
 			boolean downTile = y / 16 == playerShip.y /16 + 1;
-=======
-			moving = false;
-		}
-		
-		//updateShooting();
-		
-		
-	}
-	
-	public void move(int x0, int y0) {
-
-		/*
-		 * If we are advancing on 2 axis, we run each one separately so we can
-		 * process collision separately for each axis
-		 */
-		if (x0 != 0 && y0 != 0) {
-
-			move(x0, 0); // Enables collision sliding because we are moving each
-							// coordinate separately
-			move(0, y0);
-			return;
-		}
-
-		if (x0 > 0) {
-			direction = 3;
-			mobDirection = Direction.RIGHT; // Right
-		}
-		if (x0 < 0) {
-			direction = 1;
-			mobDirection = Direction.LEFT; // Left
-		}
-		if (y0 > 0) {
-			direction = 2;
-			mobDirection = Direction.DOWN; // Down
-		}
-		if (y0 < 0) {
-			direction = 0;
-			mobDirection = Direction.UP; // Up
-		}
-
-		if (!collision(x0, y0)) { // If there's no collision, we increase x and
-									// y variables (mob location)
-			// -1, 0, or 1
-			x += x0;
-
-			y += y0;
-
-			//System.out.printf("Player Location: (%d, %d)%n", x / 16, y / 16);
-		}
-
-	}
-	
-	protected void shoot(int x, int y, int direction) {
-
-		Projectile p = new ShipProjectile(this.x, this.y, this.direction);
-		p.initialize(level);
-		projectiles.add(p);
-		level.add(p);
-
-		// System.out.println("Shooting!");
-
-	}
-	
-	private void updateShooting() {
-		
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 
 
 			boolean leftTile = (x / 16 == playerShip.x / 16 - 1);

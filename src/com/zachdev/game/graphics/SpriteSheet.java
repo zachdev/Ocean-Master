@@ -72,55 +72,7 @@ public class SpriteSheet {
 
 	public Sprite[] sprites;
 
-<<<<<<< HEAD
 	// For a standard square sprite sheet
-=======
-	
-	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
-		
-		int xx = x * spriteSize;
-		int yy = y * spriteSize;
-		
-		int w = width * spriteSize;
-		int h = height * spriteSize;
-		
-		if (width == height) {
-			
-			this.size = width;
-		}
-		else {
-			this.size = -1;
-		}
-		
-		this.width = w;
-		this.height = h;
-		
-		pixels = new int[w * h];
-		
-		for (int y0 = 0; y0 < h; y0++) {
-			
-			int yp = yy + y0;
-			
-			for (int x0 = 0; x0 < w; x0++) {
-				
-				int xp = xx + x0;
-				
-				pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.width];
-			}
-		}
-		
-		for (int y0 = 0; y0 < this.height; y0++) {
-			
-			for (int x0 = 0; x0 < this.width; x0++) {
-				
-				//Sprite sprite = new Sprite()
-				
-				
-			}
-		}
-	}
-	
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 	public SpriteSheet(String path, int size) {
 		
 		this.path = path;
@@ -146,7 +98,6 @@ public class SpriteSheet {
 		loadSpriteSheet();
 	}
 	
-<<<<<<< HEAD
 	// Sub sheet (specify subsection of sheet to crop out)
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
 		
@@ -216,14 +167,6 @@ public class SpriteSheet {
 	
 	
 	private void loadSpriteSheet() {
-=======
-	public Sprite[] getSprite() {
-		
-		return null;
-	}
-	
-	private void loadSprite() {
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 		
 		try {
 			BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path)); // Creates a buffered image with the sprite sheet

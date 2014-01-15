@@ -122,7 +122,6 @@ public class Game extends Canvas implements Runnable {
 		
 		player.initialize(level);
 		level.add(player);
-<<<<<<< HEAD
 		
 		blueWizard = new BlueWizard(blueWizardSpawnLocation.getX(), blueWizardSpawnLocation.getY());
 		level.add(blueWizard);
@@ -139,8 +138,6 @@ public class Game extends Canvas implements Runnable {
 		oldMan = new OldMan(oldManSpawnLocation.getX(), oldManSpawnLocation.getY());
 		level.add(oldMan);
 		oldMan.initialize(level);
-=======
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 		
 		
 		enemy = new Enemy(8, 6, 1);
@@ -254,10 +251,6 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {
 		
 		keyboard.tick(); 			// Update the keyboard input
-<<<<<<< HEAD
-=======
-		//player.tick();				// Update player logic
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 		level.tick();				// Update level entities (including player and mobs)
 	}
 	/**

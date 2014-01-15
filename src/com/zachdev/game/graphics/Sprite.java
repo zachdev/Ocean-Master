@@ -17,8 +17,6 @@ public class Sprite {
 	
 	protected int width, height;
 	
-	protected int width, height;
-	
 	public static Sprite voidSprite = new Sprite(16, 0); // Creates a tile with all black colors
 	
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
@@ -41,24 +39,6 @@ public class Sprite {
 	public static Sprite waterEdgeBottomLeft = new Sprite(16, 0, 6, SpriteSheet.tiles);
 	public static Sprite waterEdgeBottomMiddle = new Sprite(16, 1, 6, SpriteSheet.tiles);
 	public static Sprite waterEdgeBottomRight = new Sprite(16, 3, 6, SpriteSheet.tiles);
-<<<<<<< HEAD
-=======
-	
-	
-	public static Sprite explosion1 = new Sprite(16, 0, 2, SpriteSheet.tiles);
-	public static Sprite explosion2 = new Sprite(16, 1, 2, SpriteSheet.tiles);
-
-	public static Sprite explosion3 = new Sprite(16, 2, 2, SpriteSheet.tiles);
-	public static Sprite explosion4 = new Sprite(16, 3, 2, SpriteSheet.tiles);
-	public static Sprite explosion5 = new Sprite(16, 4, 2, SpriteSheet.tiles);
-
-
-	
-	
-	
-	
-	
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 	
 	
 	public static Sprite explosion1 = new Sprite(16, 0, 2, SpriteSheet.tiles);
@@ -78,7 +58,6 @@ public class Sprite {
 	public static Sprite enemyLeft1 = new Sprite(16, 1, 11, SpriteSheet.tiles);
 	public static Sprite enemyRight1 = new Sprite(16, 1, 9, SpriteSheet.tiles);
 	
-<<<<<<< HEAD
 	
 	// For loading an individual sprite from a pixels array
 	public Sprite(int[] pixels, int width, int height) {
@@ -104,8 +83,6 @@ public class Sprite {
 		
 	}
 	
-=======
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 	public Sprite (SpriteSheet sheet, int width, int height) {
 		
 		if (width == height) this.size = width;

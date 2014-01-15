@@ -2,7 +2,6 @@ package com.zachdev.game.graphics;
 
 public class AnimatedSprite extends Sprite {
 	
-<<<<<<< HEAD
 	private Sprite sprite;
 	
 	private int frame = 0;
@@ -56,60 +55,16 @@ public class AnimatedSprite extends Sprite {
 		}
 		
 		sprite = sheet.getSprites()[index];
-=======
-	private int frame = 0;
-	
-	private Sprite sprite;
-	
-	private int rate = 5;
-	
-	private int animationLength = -1;
-	
-	
-	
-	
-	
-	public AnimatedSprite (SpriteSheet spriteSheet, int width, int height, int animationLength) {
-		
-		super(spriteSheet, width, height);
-		this.animationLength = animationLength;
-		
-		
-		
-		
-	}
-	
-	public void tick() {
-		
-		if (frame > animationLength) frame = 0;
-		else frame++;
-		
-		sprite = 
-		
-		
-	}
-	
-	public Sprite getSprite() {
-		
-		return sprite;
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 	}
 
 	/**
 	 * Sets the rate of the animation
-<<<<<<< HEAD
 	 * 
-=======
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 	 * @param frameRate
 	 */
 	public void setFrameRate(int frameRate) {
 		rate = frameRate;
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> ad915c85f7f824be629cc8c431642fd3dc38b240
 	}
 
 }
